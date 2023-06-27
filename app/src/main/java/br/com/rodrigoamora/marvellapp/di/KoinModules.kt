@@ -36,6 +36,7 @@ val databaseModule = module {
     }
 
     single { get<AppDatabase>().characterDao() }
+    single { get<AppDatabase>().comicDao() }
 }
 
 val repositoryModule = module {
