@@ -7,5 +7,8 @@ data class CharacterResponse(
     var code: Int,
 
     @SerializedName("data")
-    var data: CharacterData
+    var data: CharacterData,
+
+    @SerializedName("status")
+    var status: String,
 )
