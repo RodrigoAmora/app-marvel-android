@@ -1,6 +1,7 @@
 package br.com.rodrigoamora.marvellapp.network.retrofit
 
 import br.com.rodrigoamora.marvellapp.network.retrofit.service.CharacterService
+import br.com.rodrigoamora.marvellapp.network.retrofit.service.ComicService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -40,6 +41,10 @@ class AppRetrofit {
     // SERVICES
     fun characterService(): CharacterService {
         return retrofit.create(CharacterService::class.java)
+    }
+
+    fun comicService(): ComicService {
+        return retrofit.create(ComicService::class.java)
     }
 
 }
