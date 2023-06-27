@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import br.com.rodrigoamora.marvellapp.R
+import br.com.rodrigoamora.marvellapp.model.Character
 import br.com.rodrigoamora.marvellapp.ui.activity.CharacterActivity
 import br.com.rodrigoamora.marvellapp.ui.recyclerview.adapter.ListCharactersAdapter
 
@@ -45,6 +46,7 @@ class ListCharactersFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getCharactersActivity()
         configureRecyclerView()
+        getCharacters()
     }
 
     private fun configureRecyclerView() {
@@ -62,6 +64,14 @@ class ListCharactersFragment: Fragment() {
         recyclerViewCharacters.itemAnimator = DefaultItemAnimator()
         recyclerViewCharacters.layoutManager = linearLayout
         recyclerViewCharacters.isNestedScrollingEnabled = false
+    }
+
+    fun populateRecyclerView(charactersList: List<Character>) {
+        adapter.update(charactersList)
+    }
+
+    private fun getCharacters() {
+        characterActivity.getCharacters()
     }
 
     private fun getCharactersActivity() {

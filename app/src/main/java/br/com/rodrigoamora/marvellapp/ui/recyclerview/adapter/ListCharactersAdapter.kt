@@ -25,9 +25,9 @@ class ListCharactersAdapter(
         holder.setValues(charactersList[position])
     }
 
-    fun update(salonsList: List<Character>) {
+    fun update(charactersList: List<Character>) {
         this.charactersList.clear()
-        this.charactersList.addAll(salonsList)
+        this.charactersList.addAll(charactersList)
         notifyDataSetChanged()
     }
 
