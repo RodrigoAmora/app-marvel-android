@@ -62,6 +62,9 @@ dependencies {
     // CONSTRAINT LAYOUT
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
 
+    // GLIDE
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+
     // KOIN
     implementation "io.insert-koin:koin-android:3.4.1"
     testImplementation "io.insert-koin:koin-test:3.4.1"
