@@ -12,4 +12,6 @@
 
     <string name="menu_characters">Characters</string>
     <string name="menu_comics">Comics</string>
+
+    <string name="character">Character: </string>
 </resources>
