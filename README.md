@@ -1,6 +1,6 @@
 # app-marvel-android
 App que consulta a API da Marvel.<br>
-O App rode a partir do Android 7.0 (API Level 24)
+O App roda a partir do Android 7.0 (API Level 24)
 
 <hr>
 
@@ -14,4 +14,8 @@ O App usa as seguintes dependências:
 * Material Design
 * Retrofit
 * Room
-* ViewModel
+* ViewMode
+
+<hr>
+
+l
