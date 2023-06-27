@@ -14,7 +14,7 @@ O App usa as seguintes dependências:
 * Material Design
 * Retrofit
 * Room
-* ViewMode
+* ViewModel
 
 <hr>
 
