@@ -48,6 +48,7 @@ val retrofitModule = module {
 
 val servicesModule = module {
     single { AppRetrofit().characterService() }
+    single { AppRetrofit().comicService() }
 }
 
 val viewModelModule = module {
