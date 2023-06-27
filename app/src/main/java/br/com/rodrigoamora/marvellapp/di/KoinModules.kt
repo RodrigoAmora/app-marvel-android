@@ -4,8 +4,8 @@ import androidx.room.Room
 import br.com.rodrigoamora.marvellapp.database.AppDatabase
 import br.com.rodrigoamora.marvellapp.repository.CharacterRepository
 import br.com.rodrigoamora.marvellapp.repository.impl.CharacterRepositoryImpl
-import br.com.rodrigoamora.marvellapp.retrofit.AppRetrofit
-import br.com.rodrigoamora.marvellapp.retrofit.webclient.CharacterWebClient
+import br.com.rodrigoamora.marvellapp.network.retrofit.AppRetrofit
+import br.com.rodrigoamora.marvellapp.network.retrofit.webclient.CharacterWebClient
 import br.com.rodrigoamora.marvellapp.ui.viewmodel.CharacterViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.GlobalContext.loadKoinModules
