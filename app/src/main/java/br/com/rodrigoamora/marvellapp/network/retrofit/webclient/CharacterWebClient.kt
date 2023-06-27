@@ -48,4 +48,19 @@ class CharacterWebClient(
         )
     }
 
+    fun getCharacterByName(name: String,
+                           completion: (charactersList: CharacterResponse?) -> Unit,
+                           failure: (errorCode: Int) -> Unit
+    ) {
+        executeRequest(
+            service.getCharacterByName(1, AppRetrofit.API_KEY, AppRetrofit.MD5_HASH, name),
+            completion = { charactersList ->
+                charactersList?.let {
+                    completion(it)
+                }
+            },
+            failure = { errorCode ->  failure(errorCode) }
+        )
+    }
+
 }
