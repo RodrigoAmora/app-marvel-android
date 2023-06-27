@@ -3,6 +3,7 @@ package br.com.rodrigoamora.marvellapp.ui.activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -14,6 +15,7 @@ import br.com.rodrigoamora.marvellapp.R
 import br.com.rodrigoamora.marvellapp.ui.fragment.ListCharactersFragment
 import br.com.rodrigoamora.marvellapp.ui.viewmodel.CharacterViewModel
 import br.com.rodrigoamora.marvellapp.util.FragmentUtil
+import br.com.rodrigoamora.marvellapp.util.NetworkUtil
 import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -79,11 +81,15 @@ class CharacterActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     }
 
     fun getCharacters() {
-        characterViewModel.getCharacters().observe(this,
-            Observer { charactersList ->
-                charactersList.result?.let { listCharactersFragment.populateRecyclerView(it) }
-            }
-        )
+        if (NetworkUtil.checkConnection(this)) {
+            characterViewModel.getCharacters().observe(this,
+                Observer { charactersList ->
+                    charactersList.result?.let { listCharactersFragment.populateRecyclerView(it) }
+                }
+            )
+        } else {
+            Toast.makeText(this, getString(R.string.error_no_internet), Toast.LENGTH_LONG).show()
+        }
     }
 
 }

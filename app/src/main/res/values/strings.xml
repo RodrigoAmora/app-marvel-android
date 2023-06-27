@@ -13,5 +13,9 @@
     <string name="menu_characters">Characters</string>
     <string name="menu_comics">Comics</string>
 
+    <!-- ERROR MESSAGES-->
+    <string name="error_no_internet">No internet!</string>
+
+    <!-- CHARACTER -->
     <string name="character">Character: </string>
 </resources>
