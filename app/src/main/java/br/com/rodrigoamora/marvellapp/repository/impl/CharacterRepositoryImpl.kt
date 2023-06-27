@@ -52,7 +52,7 @@ class CharacterRepositoryImpl(
     private fun getCharacter(failure: (errorCode: Int) -> Unit) {
         characterWebClient.getCharacters(
             completion = { charactersList ->
-                charactersList?.let {
+                charactersList?.data?.result?.let {
                     saveCharacters(it)
                 }
             },

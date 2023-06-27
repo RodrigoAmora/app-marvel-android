@@ -1,7 +1,6 @@
 package br.com.rodrigoamora.marvellapp.retrofit.webclient
 
-import br.com.rodrigoamora.marvellapp.model.Character
-import br.com.rodrigoamora.marvellapp.repository.CharacterRepository
+import br.com.rodrigoamora.marvellapp.model.callback.CharacterResponse
 import br.com.rodrigoamora.marvellapp.retrofit.AppRetrofit
 import br.com.rodrigoamora.marvellapp.retrofit.service.CharacterService
 import retrofit2.Call
@@ -14,7 +13,7 @@ class CharacterWebClient(
 
     private fun<T> executeRequest(
         call: Call<T>,
-        completion: (salonsSaved: T?) -> Unit,
+        completion: (result: T?) -> Unit,
         failure: (errorCode: Int) -> Unit
     ) {
         call.enqueue(object : Callback<T> {
@@ -35,12 +34,16 @@ class CharacterWebClient(
         })
     }
 
-    fun getCharacters(completion: (charactersList: List<Character>?) -> Unit,
+    fun getCharacters(completion: (charactersList: CharacterResponse?) -> Unit,
                       failure: (errorCode: Int) -> Unit
     ) {
         executeRequest(
             service.getCharacters(1, AppRetrofit.API_KEY, AppRetrofit.MD5_HASH),
-            completion = { charactersList -> completion(charactersList) },
+            completion = { charactersList ->
+                charactersList?.let {
+                    completion(it)
+                }
+            },
             failure = { errorCode ->  failure(errorCode) }
         )
     }
