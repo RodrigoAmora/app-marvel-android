@@ -1,8 +1,8 @@
-package br.com.rodrigoamora.marvellapp.retrofit.webclient
+package br.com.rodrigoamora.marvellapp.network.retrofit.webclient
 
-import br.com.rodrigoamora.marvellapp.model.callback.CharacterResponse
-import br.com.rodrigoamora.marvellapp.retrofit.AppRetrofit
-import br.com.rodrigoamora.marvellapp.retrofit.service.CharacterService
+import br.com.rodrigoamora.marvellapp.network.response.CharacterResponse
+import br.com.rodrigoamora.marvellapp.network.retrofit.AppRetrofit
+import br.com.rodrigoamora.marvellapp.network.retrofit.service.CharacterService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

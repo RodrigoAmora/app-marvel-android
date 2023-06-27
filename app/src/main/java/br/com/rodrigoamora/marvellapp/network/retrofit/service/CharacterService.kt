@@ -1,6 +1,6 @@
-package br.com.rodrigoamora.marvellapp.retrofit.service
+package br.com.rodrigoamora.marvellapp.network.retrofit.service
 
-import br.com.rodrigoamora.marvellapp.model.callback.CharacterResponse
+import br.com.rodrigoamora.marvellapp.network.response.CharacterResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,4 +1,4 @@
-package br.com.rodrigoamora.marvellapp.model.callback
+package br.com.rodrigoamora.marvellapp.network.response
 
 import br.com.rodrigoamora.marvellapp.model.Character
 import com.google.gson.annotations.SerializedName

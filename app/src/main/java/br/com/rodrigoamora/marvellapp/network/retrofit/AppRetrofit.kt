@@ -1,6 +1,6 @@
-package br.com.rodrigoamora.marvellapp.retrofit
+package br.com.rodrigoamora.marvellapp.network.retrofit
 
-import br.com.rodrigoamora.marvellapp.retrofit.service.CharacterService
+import br.com.rodrigoamora.marvellapp.network.retrofit.service.CharacterService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
