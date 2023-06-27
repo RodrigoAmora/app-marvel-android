@@ -1,9 +1,10 @@
-package br.com.rodrigoamora.marvellapp
+package br.com.rodrigoamora.marvellapp.ui.activity
 
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import br.com.rodrigoamora.marvellapp.R
 import br.com.rodrigoamora.marvellapp.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
