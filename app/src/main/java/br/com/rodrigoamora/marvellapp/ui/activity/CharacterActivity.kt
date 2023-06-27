@@ -8,7 +8,7 @@ import br.com.rodrigoamora.marvellapp.R
 import br.com.rodrigoamora.marvellapp.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity() {
+class CharacterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
