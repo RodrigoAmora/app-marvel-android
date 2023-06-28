@@ -22,7 +22,7 @@ class ListCharactersAdapter(
     override fun getItemCount(): Int = charactersList.size
 
     override fun onBindViewHolder(holder: ListCharactersViewHolder, position: Int) {
-        holder.setValues(charactersList[position])
+        holder.setValues(context, charactersList[position])
     }
 
     fun update(charactersList: List<Character>) {
