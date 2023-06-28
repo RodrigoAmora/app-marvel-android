@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 @Entity
-//@Parcelize
 data class Character(
     @PrimaryKey
     @SerializedName("id")
@@ -16,6 +15,8 @@ data class Character(
     var name: String,
 
     @SerializedName("description")
-    var description: String
-    //var thumbnail: Thumbnail
+    var description: String,
+
+    @SerializedName("thumbnail")
+    var thumbnail: Thumbnail
 ): Serializable
