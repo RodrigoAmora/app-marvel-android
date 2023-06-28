@@ -32,6 +32,7 @@ val databaseModule = module {
             get(),
             AppDatabase::class.java,
             "app-marvel-database")
+            .fallbackToDestructiveMigration()
             .build()
     }
 
