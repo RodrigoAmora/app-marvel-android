@@ -76,21 +76,24 @@ class CharacterActivity : BaseActivity(),
     }
 
     private fun changeFragment(fragment: Fragment, bundle: Bundle?, backstack: Boolean) {
-        FragmentUtil.changeFragment(R.id.container, fragment,
-            supportFragmentManager, backstack, bundle)
+        FragmentUtil.changeFragment(R.id.container,
+                                    fragment,
+                                    supportFragmentManager,
+                                    backstack,
+                                    bundle)
     }
 
     fun getCharacters() {
-        if (NetworkUtil.checkConnection(this)) {
-            characterViewModel.getCharacters().observe(this,
-                Observer { charactersList ->
-                    charactersList.result?.let { listCharactersFragment.populateRecyclerView(it) }
-                    charactersList.error?.let { showError(it) }
+        characterViewModel.getCharacters().observe(this,
+            Observer { charactersList ->
+                charactersList.result?.let { listCharactersFragment.populateRecyclerView(it) }
+                charactersList.error?.let { showError(it) }
+
+                if (!NetworkUtil.checkConnection(this)) {
+                    showToast(getString(R.string.error_no_internet))
                 }
-            )
-        } else {
-            showToast(getString(R.string.error_no_internet))
-        }
+            }
+        )
     }
 
     fun getCharacterByName(name: String) {
