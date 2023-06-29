@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Marvell App</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="action_settings">Configurações</string>
+
+    <string name="menu_characters">Personagens</string>
+    <string name="menu_comics">HQs</string>
+
+    <!-- ERROR MESSAGES-->
+    <string name="error_no_internet">Sem internet!</string>
+
+    <!-- CHARACTER -->
+    <string name="character">Personagen: </string>
+</resources>
