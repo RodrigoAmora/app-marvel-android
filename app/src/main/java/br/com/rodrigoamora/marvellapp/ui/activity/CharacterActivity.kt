@@ -3,9 +3,7 @@ package br.com.rodrigoamora.marvellapp.ui.activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -20,7 +18,7 @@ import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class CharacterActivity : AppCompatActivity(),
+class CharacterActivity : BaseActivity(),
                             NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawer: DrawerLayout
@@ -87,10 +85,11 @@ class CharacterActivity : AppCompatActivity(),
             characterViewModel.getCharacters().observe(this,
                 Observer { charactersList ->
                     charactersList.result?.let { listCharactersFragment.populateRecyclerView(it) }
+                    charactersList.error?.let { showError(it) }
                 }
             )
         } else {
-            Toast.makeText(this, getString(R.string.error_no_internet), Toast.LENGTH_LONG).show()
+            showToast(getString(R.string.error_no_internet))
         }
     }
 
@@ -99,10 +98,11 @@ class CharacterActivity : AppCompatActivity(),
             characterViewModel.getCharacterByName(name).observe(this,
                 Observer { charactersList ->
                     charactersList.result?.let { listCharactersFragment.populateRecyclerView(it) }
+                    charactersList.error?.let { showError(it) }
                 }
             )
         } else {
-            Toast.makeText(this, getString(R.string.error_no_internet), Toast.LENGTH_LONG).show()
+            showToast(getString(R.string.error_no_internet))
         }
     }
 
