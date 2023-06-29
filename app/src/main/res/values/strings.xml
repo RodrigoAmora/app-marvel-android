@@ -8,7 +8,6 @@
     <string name="nav_header_created_by">@string/created_by</string>
     <string name="nav_header_email">@string/email_rodrigo_amora</string>
 
-    <string name="action_search_character_by_name">Search character by name</string>
     <string name="action_settings">Settings</string>
 
     <string name="menu_characters">Characters</string>
@@ -26,4 +25,5 @@
 
     <!-- CHARACTER -->
     <string name="character">Character: </string>
+    <string name="search_character_by_name">Search character by name</string>
 </resources>

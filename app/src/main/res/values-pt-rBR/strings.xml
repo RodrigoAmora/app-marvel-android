@@ -9,7 +9,6 @@
     <string name="nav_header_created_by">android.studio@android.com</string>
     <string name="nav_header_email">@string/email_rodrigo_amora</string>
 
-    <string name="action_search_character_by_name">Buscar personagen pelo nome</string>
     <string name="action_settings">Configurações</string>
 
     <string name="menu_characters">Personagens</string>
@@ -27,4 +26,5 @@
 
     <!-- CHARACTER -->
     <string name="character">Personagen: </string>
+    <string name="search_character_by_name">Buscar personagen pelo nome</string>
 </resources>
