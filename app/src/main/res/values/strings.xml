@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Marvell App</string>
+    <string name="app_name">Marvel App</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">@string/app_name</string>
+    <string name="nav_header_created_by">@string/created_by</string>
+    <string name="nav_header_email">@string/email_rodrigo_amora</string>
 
     <string name="action_search_character_by_name">Search character by name</string>
     <string name="action_settings">Settings</string>
@@ -19,6 +19,10 @@
     <string name="error_cant_was_possible_perform_operation">Can\'t was possible perform operation.</string>
     <string name="error_service_unavailable">Service unavailable, please try later.</string>
     <string name="error_no_internet">No internet!</string>
+
+    <!-- ABOUT -->
+    <string name="created_by"><b>Created by</b> Rodrigo Amora</string>
+    <string name="email_rodrigo_amora">rodrigo.amora.freitas@gmail.com</string>
 
     <!-- CHARACTER -->
     <string name="character">Character: </string>

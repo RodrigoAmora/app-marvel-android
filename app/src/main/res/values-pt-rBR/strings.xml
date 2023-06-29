@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Marvell App</string>
+    <string name="app_name">Marvel App</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">@string/app_name</string>
+    <string name="nav_header_created_by">android.studio@android.com</string>
+    <string name="nav_header_email">@string/email_rodrigo_amora</string>
 
     <string name="action_search_character_by_name">Buscar personagen pelo nome</string>
     <string name="action_settings">Configurações</string>
@@ -20,6 +20,10 @@
     <string name="error_cant_was_possible_perform_operation">Não foi possível realizar a operação.</string>
     <string name="error_service_unavailable">Serviço indisponível, por favor tente mais tarde.</string>
     <string name="error_no_internet">Sem internet!</string>
+
+    <!-- ABOUT -->
+    <string name="created_by"><b>Criado por:</b> Rodrigo Amora</string>
+    <string name="email_rodrigo_amora">rodrigo.amora.freitas@gmail.com</string>
 
     <!-- CHARACTER -->
     <string name="character">Personagen: </string>
