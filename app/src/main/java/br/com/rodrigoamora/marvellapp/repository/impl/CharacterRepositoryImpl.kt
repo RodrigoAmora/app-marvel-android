@@ -61,32 +61,20 @@ class CharacterRepositoryImpl(
     }
 
     override fun getCharacterByName(name: String): LiveData<Resource<List<Character>?>> {
-        val failuresFromWebApiLiveData = MutableLiveData<Resource<List<Character>?>>()
-        mediator.addSource(failuresFromWebApiLiveData) { resourceOfFailure ->
-            val currentResource = mediator.value
-            val newResource: Resource<List<Character>?> = if(currentResource != null) {
-                Resource(result = currentResource.result, error = resourceOfFailure.error)
-            } else {
-                resourceOfFailure
-            }
-            mediator.value = newResource
-        }
-
-        getCharacters(
+        getCharacterByName(name,
             failure = { errorCode ->
-                failuresFromWebApiLiveData.value = Resource(result = null, error = errorCode)
+                mediator.value = Resource(result = null, error = errorCode)
             }
         )
-
         return mediator
     }
 
     private fun getCharacterByName(name: String,
-                             failure: (errorCode: Int) -> Unit) {
+                                    failure: (errorCode: Int) -> Unit) {
         characterWebClient.getCharacterByName(name,
             completion = { charactersList ->
                 charactersList?.data?.result?.let {
-                    saveCharacters(it)
+                    mediator.value = Resource(result = it)
                 }
             },
             failure = { errorCode ->  failure(errorCode) }

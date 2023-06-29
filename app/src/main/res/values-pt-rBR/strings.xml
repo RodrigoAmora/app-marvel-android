@@ -9,6 +9,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
+    <string name="action_search_character_by_name">Buscar personagen pelo nome</string>
     <string name="action_settings">Configurações</string>
 
     <string name="menu_characters">Personagens</string>

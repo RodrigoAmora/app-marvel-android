@@ -14,4 +14,8 @@ class CharacterViewModel(
         return characterRepository.getCharacters()
     }
 
+    fun getCharacterByName(name: String): LiveData<Resource<List<Character>?>> {
+        return characterRepository.getCharacterByName(name)
+    }
+
 }

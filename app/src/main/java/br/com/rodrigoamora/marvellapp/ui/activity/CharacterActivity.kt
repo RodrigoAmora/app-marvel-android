@@ -19,7 +19,9 @@ import br.com.rodrigoamora.marvellapp.util.NetworkUtil
 import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CharacterActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+class CharacterActivity : AppCompatActivity(),
+                            NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawer: DrawerLayout
 
@@ -83,6 +85,18 @@ class CharacterActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     fun getCharacters() {
         if (NetworkUtil.checkConnection(this)) {
             characterViewModel.getCharacters().observe(this,
+                Observer { charactersList ->
+                    charactersList.result?.let { listCharactersFragment.populateRecyclerView(it) }
+                }
+            )
+        } else {
+            Toast.makeText(this, getString(R.string.error_no_internet), Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun getCharacterByName(name: String) {
+        if (NetworkUtil.checkConnection(this)) {
+            characterViewModel.getCharacterByName(name).observe(this,
                 Observer { charactersList ->
                     charactersList.result?.let { listCharactersFragment.populateRecyclerView(it) }
                 }
