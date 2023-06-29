@@ -15,6 +15,9 @@
     <string name="menu_comics">Comics</string>
 
     <!-- ERROR MESSAGES-->
+    <string name="error_access_denied">Access Denied!</string>
+    <string name="error_cant_was_possible_perform_operation">Can\'t was possible perform operation.</string>
+    <string name="error_service_unavailable">Service unavailable, please try later.</string>
     <string name="error_no_internet">No internet!</string>
 
     <!-- CHARACTER -->
