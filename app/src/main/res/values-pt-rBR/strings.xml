@@ -6,7 +6,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="nav_header_title">@string/app_name</string>
-    <string name="nav_header_created_by">android.studio@android.com</string>
+    <string name="nav_header_created_by">@string/created_by</string>
     <string name="nav_header_email">@string/email_rodrigo_amora</string>
 
     <string name="action_settings">Configurações</string>
