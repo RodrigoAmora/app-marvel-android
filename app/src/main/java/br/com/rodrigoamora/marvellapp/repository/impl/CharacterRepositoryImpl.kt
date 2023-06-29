@@ -19,10 +19,6 @@ class CharacterRepositoryImpl(
 
     private val mediator = MediatorLiveData<Resource<List<Character>?>>()
 
-    override fun deleteCharacter(character: Character) {
-        TODO("Not yet implemented")
-    }
-
     override fun getCharacters(): LiveData<Resource<List<Character>?>> {
         mediator.addSource(getCharactersFromDataBase()) { salonsFound ->
             mediator.value = Resource(salonsFound)
