@@ -56,9 +56,9 @@ class ListCharactersFragment: Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
                     if (it.isEmpty()) {
-                        characterActivity.getCharacters()
+                        getCharacters()
                     } else {
-                        characterActivity.getCharacterByName(it)
+                        getCharacterByName(it)
                     }
                 }
                 return false
@@ -108,6 +108,10 @@ class ListCharactersFragment: Fragment() {
 
     private fun getCharacters() {
         characterActivity.getCharacters()
+    }
+
+    private fun getCharacterByName(name: String) {
+        characterActivity.getCharacterByName(name)
     }
 
     private fun getCharactersActivity() {
