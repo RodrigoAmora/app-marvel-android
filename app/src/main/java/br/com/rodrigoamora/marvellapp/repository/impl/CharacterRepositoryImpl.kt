@@ -5,9 +5,9 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import br.com.rodrigoamora.marvellapp.database.dao.CharacterDao
 import br.com.rodrigoamora.marvellapp.model.Character
+import br.com.rodrigoamora.marvellapp.network.retrofit.webclient.CharacterWebClient
 import br.com.rodrigoamora.marvellapp.repository.CharacterRepository
 import br.com.rodrigoamora.marvellapp.repository.Resource
-import br.com.rodrigoamora.marvellapp.network.retrofit.webclient.CharacterWebClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
