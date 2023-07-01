@@ -1,5 +1,9 @@
 package br.com.rodrigoamora.marvellapp.ui.activity
 
+import android.annotation.TargetApi
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.rodrigoamora.marvellapp.R
+import br.com.rodrigoamora.marvellapp.factory.ShortcutFactory
 import br.com.rodrigoamora.marvellapp.ui.fragment.ListCharactersFragment
 import br.com.rodrigoamora.marvellapp.ui.viewmodel.CharacterViewModel
 import br.com.rodrigoamora.marvellapp.util.FragmentUtil
@@ -34,6 +39,11 @@ class CharacterActivity : BaseActivity(),
         setContentView(R.layout.activity_character)
         createToolbarAndNavigationView()
         changeFragment(listCharactersFragment, null, false)
+        if (Build.VERSION.SDK_INT >= 26) {
+            createShortcut()
+        } else {
+            changeFragment(listCharactersFragment, null, false)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -109,4 +119,21 @@ class CharacterActivity : BaseActivity(),
         }
     }
 
+    @TargetApi(26)
+    private fun createShortcut() {
+        val shortcutManager = getSystemService(ShortcutManager::class.java)
+        val shortLabels = arrayOf<String>(
+            getString(R.string.shortcut_characters),
+            getString(R.string.shortcut_comics)
+        )
+
+        val icons = arrayOf<Int>(
+            R.drawable.ic_menu_characters,
+            R.drawable.ic_menu_comics
+        )
+        val shortcutInfoList: List<ShortcutInfo?> = ShortcutFactory.createShortcutInfo(this,
+                                                                                        shortLabels,
+                                                                                        icons)
+        shortcutManager.dynamicShortcuts = shortcutInfoList
+    }
 }

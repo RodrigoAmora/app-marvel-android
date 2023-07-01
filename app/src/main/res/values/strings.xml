@@ -19,6 +19,10 @@
     <string name="error_service_unavailable">Service unavailable, please try later.</string>
     <string name="error_no_internet">No internet!</string>
 
+    <!-- SHORTCUT -->
+    <string name="shortcut_characters">Characters</string>
+    <string name="shortcut_comics">Comics</string>
+
     <!-- ABOUT -->
     <string name="created_by"><b>Created by:</b> Rodrigo Amora</string>
     <string name="email_rodrigo_amora">rodrigo.amora.freitas@gmail.com</string>
