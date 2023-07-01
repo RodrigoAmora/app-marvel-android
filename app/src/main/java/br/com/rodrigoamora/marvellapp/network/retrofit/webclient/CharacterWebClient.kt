@@ -2,7 +2,7 @@ package br.com.rodrigoamora.marvellapp.network.retrofit.webclient
 
 import br.com.rodrigoamora.marvellapp.network.apikey.MarvelApiKey
 import br.com.rodrigoamora.marvellapp.network.response.CharacterResponse
-import br.com.rodrigoamora.marvellapp.network.retrofit.AppRetrofit
+import br.com.rodrigoamora.marvellapp.network.response.ComicResponse
 import br.com.rodrigoamora.marvellapp.network.retrofit.service.CharacterService
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,8 +36,7 @@ class CharacterWebClient(
     }
 
     fun getCharacters(completion: (charactersList: CharacterResponse?) -> Unit,
-                      failure: (errorCode: Int) -> Unit
-    ) {
+                      failure: (errorCode: Int) -> Unit) {
         executeRequest(
             service.getCharacters(1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH),
             completion = { charactersList ->
@@ -51,12 +50,25 @@ class CharacterWebClient(
 
     fun getCharacterByName(name: String,
                            completion: (charactersList: CharacterResponse?) -> Unit,
-                           failure: (errorCode: Int) -> Unit
-    ) {
+                           failure: (errorCode: Int) -> Unit) {
         executeRequest(
             service.getCharacterByName(1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH, name),
             completion = { charactersList ->
                 charactersList?.let {
+                    completion(it)
+                }
+            },
+            failure = { errorCode ->  failure(errorCode) }
+        )
+    }
+
+    fun getComicsOfCharacters(characterID: Int,
+                              completion: (comicResponse: ComicResponse?) -> Unit,
+                              failure: (errorCode: Int) -> Unit) {
+        executeRequest(
+            service.getComicsOfCharacters(characterID, 1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH),
+            completion = { comicResponse ->
+                comicResponse?.let {
                     completion(it)
                 }
             },
