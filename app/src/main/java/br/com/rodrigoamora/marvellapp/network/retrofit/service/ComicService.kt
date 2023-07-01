@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface ComicService {
 
-    @GET("public/comics")
+    @GET("comics")
     fun getComics(@Query("ts") ts: Int,
                   @Query("apikey") apikey: String,
                   @Query("hash") hash: String): Call<ComicResponse>

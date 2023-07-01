@@ -26,7 +26,7 @@ class AppRetrofit {
             .build()
     }
     private val retrofit by lazy {
-        val baseURL = "https://gateway.marvel.com/v1/"
+        val baseURL = "https://gateway.marvel.com/v1/public/"
         Retrofit.Builder()
             .baseUrl(baseURL)
             .addConverterFactory(GsonConverterFactory.create())
