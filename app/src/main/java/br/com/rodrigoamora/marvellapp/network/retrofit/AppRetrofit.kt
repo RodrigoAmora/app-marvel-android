@@ -10,11 +10,6 @@ import java.util.concurrent.TimeUnit
 
 class AppRetrofit {
 
-    companion object {
-        const val API_KEY = "d17cef9472abf96413048a10bf24e04a"
-        const val MD5_HASH = "cd79db65cd307fc9503bdadcfd9179e2"
-    }
-
     private val client by lazy {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY

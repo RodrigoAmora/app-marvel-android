@@ -1,5 +1,6 @@
 package br.com.rodrigoamora.marvellapp.network.retrofit.webclient
 
+import br.com.rodrigoamora.marvellapp.network.apikey.MarvelApiKey
 import br.com.rodrigoamora.marvellapp.network.response.CharacterResponse
 import br.com.rodrigoamora.marvellapp.network.retrofit.AppRetrofit
 import br.com.rodrigoamora.marvellapp.network.retrofit.service.CharacterService
@@ -38,7 +39,7 @@ class CharacterWebClient(
                       failure: (errorCode: Int) -> Unit
     ) {
         executeRequest(
-            service.getCharacters(1, AppRetrofit.API_KEY, AppRetrofit.MD5_HASH),
+            service.getCharacters(1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH),
             completion = { charactersList ->
                 charactersList?.let {
                     completion(it)
@@ -53,7 +54,7 @@ class CharacterWebClient(
                            failure: (errorCode: Int) -> Unit
     ) {
         executeRequest(
-            service.getCharacterByName(1, AppRetrofit.API_KEY, AppRetrofit.MD5_HASH, name),
+            service.getCharacterByName(1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH, name),
             completion = { charactersList ->
                 charactersList?.let {
                     completion(it)
