@@ -12,4 +12,10 @@ interface ComicService {
                   @Query("apikey") apikey: String,
                   @Query("hash") hash: String): Call<ComicResponse>
 
+    @GET("comics")
+    fun getComicsByTitle(@Query("ts") ts: Int,
+                         @Query("apikey") apikey: String,
+                         @Query("hash") hash: String,
+                         @Query("title") title: String): Call<ComicResponse>
+
 }
