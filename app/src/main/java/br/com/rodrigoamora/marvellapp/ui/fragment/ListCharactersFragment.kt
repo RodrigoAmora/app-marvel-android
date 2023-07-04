@@ -82,6 +82,7 @@ class ListCharactersFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getCharactersActivity()
         configureRecyclerView()
+        configureAdapter()
         getCharacters()
     }
 
@@ -102,6 +103,10 @@ class ListCharactersFragment: Fragment() {
         recyclerViewCharacters.isNestedScrollingEnabled = false
     }
 
+    private fun configureAdapter() {
+        adapter.whenSelected = this::viewDetails
+    }
+
     fun populateRecyclerView(charactersList: List<Character>) {
         adapter.update(charactersList)
     }
@@ -118,4 +123,13 @@ class ListCharactersFragment: Fragment() {
         characterActivity = activity as CharacterActivity
     }
 
+    private fun viewDetails(character: Character) {
+        val bundle = Bundle()
+        bundle.putSerializable("character", character)
+
+        val characterFragment = CharacterFragment()
+        //characterFragment.arguments = bundle
+
+        characterActivity.changeFragment(characterFragment, bundle, false)
+    }
 }

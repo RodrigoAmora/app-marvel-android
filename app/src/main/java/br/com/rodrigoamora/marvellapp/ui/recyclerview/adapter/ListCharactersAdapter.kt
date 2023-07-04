@@ -10,7 +10,8 @@ import br.com.rodrigoamora.marvellapp.ui.recyclerview.viewholder.ListCharactersV
 
 class ListCharactersAdapter(
     private val context: Context,
-    private val charactersList: MutableList<Character> = mutableListOf()
+    private val charactersList: MutableList<Character> = mutableListOf(),
+    var whenSelected: (character: Character) -> Unit = {}
 ) : RecyclerView.Adapter<ListCharactersViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListCharactersViewHolder {
@@ -22,7 +23,12 @@ class ListCharactersAdapter(
     override fun getItemCount(): Int = charactersList.size
 
     override fun onBindViewHolder(holder: ListCharactersViewHolder, position: Int) {
-        holder.setValues(context, charactersList[position])
+        val character = charactersList[position]
+
+        holder.setValues(context, character)
+        holder.itemView.setOnClickListener {
+            whenSelected(character)
+        }
     }
 
     fun update(charactersList: List<Character>) {
