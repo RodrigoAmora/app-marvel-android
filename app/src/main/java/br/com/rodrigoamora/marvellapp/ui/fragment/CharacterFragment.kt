@@ -1,7 +1,6 @@
 package br.com.rodrigoamora.marvellapp.ui.fragment
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import br.com.rodrigoamora.marvellapp.R
+import br.com.rodrigoamora.marvellapp.extension.loadImage
 import br.com.rodrigoamora.marvellapp.model.Character
-import br.com.rodrigoamora.marvellapp.model.Thumbnail
 import br.com.rodrigoamora.marvellapp.ui.activity.CharacterActivity
-import com.bumptech.glide.Glide
 
 class CharacterFragment: Fragment() {
 
@@ -55,19 +53,11 @@ class CharacterFragment: Fragment() {
     private fun populateViews() {
         val character = arguments?.getSerializable("character") as Character
 
-        loadImage(characterActivity, character.thumbnail)
+        val imageCharacterURL = "${character.thumbnail.path}.${character.thumbnail.extension}"
+        ivImageCharacter.loadImage(characterActivity, imageCharacterURL)
 
         tvDescriptionCharacter.text = character.description
         tvNameCharacter.text = character.name
     }
 
-    private fun loadImage(context: Context, thumbnail: Thumbnail) {
-        val imageCharacterURL = "${thumbnail.path}.${thumbnail.extension}"
-
-        Glide.with(context)
-            .load(imageCharacterURL)
-            .placeholder(R.drawable.ic_menu_characters)
-            .circleCrop()
-            .into(ivImageCharacter)
-    }
 }
