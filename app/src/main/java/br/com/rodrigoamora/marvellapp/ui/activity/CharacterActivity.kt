@@ -39,11 +39,7 @@ class CharacterActivity : BaseActivity(),
         setContentView(R.layout.activity_character)
         createToolbarAndNavigationView()
         changeFragment(listCharactersFragment, null, false)
-        if (Build.VERSION.SDK_INT >= 26) {
-            createShortcut()
-        } else {
-            changeFragment(listCharactersFragment, null, false)
-        }
+        createShortcut()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -85,7 +81,7 @@ class CharacterActivity : BaseActivity(),
         navigationView.itemIconTintList = null
     }
 
-    private fun changeFragment(fragment: Fragment, bundle: Bundle?, backstack: Boolean) {
+    fun changeFragment(fragment: Fragment, bundle: Bundle?, backstack: Boolean) {
         FragmentUtil.changeFragment(R.id.container,
                                     fragment,
                                     supportFragmentManager,
@@ -121,19 +117,23 @@ class CharacterActivity : BaseActivity(),
 
     @TargetApi(26)
     private fun createShortcut() {
-        val shortcutManager = getSystemService(ShortcutManager::class.java)
-        val shortLabels = arrayOf<String>(
-            getString(R.string.shortcut_characters),
-            getString(R.string.shortcut_comics)
-        )
+        if (Build.VERSION.SDK_INT >= 26) {
+            val shortcutManager = getSystemService(ShortcutManager::class.java)
+            val shortLabels = arrayOf<String>(
+                getString(R.string.shortcut_characters),
+                getString(R.string.shortcut_comics)
+            )
 
-        val icons = arrayOf<Int>(
-            R.drawable.ic_menu_characters,
-            R.drawable.ic_menu_comics
-        )
-        val shortcutInfoList: List<ShortcutInfo?> = ShortcutFactory.createShortcutInfo(this,
-                                                                                        shortLabels,
-                                                                                        icons)
-        shortcutManager.dynamicShortcuts = shortcutInfoList
+            val icons = arrayOf<Int>(
+                R.drawable.ic_menu_characters,
+                R.drawable.ic_menu_comics
+            )
+            val shortcutInfoList: List<ShortcutInfo?> = ShortcutFactory.createShortcutInfo(this,
+                shortLabels,
+                icons)
+            shortcutManager.dynamicShortcuts = shortcutInfoList
+        } else {
+            changeFragment(listCharactersFragment, null, false)
+        }
     }
 }
