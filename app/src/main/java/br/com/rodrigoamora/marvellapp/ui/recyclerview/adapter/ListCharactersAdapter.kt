@@ -13,7 +13,7 @@ import br.com.rodrigoamora.marvellapp.ui.recyclerview.viewholder.ListCharactersV
 
 class ListCharactersAdapter(
     private val context: Context,
-    private val charactersList: MutableList<Character> = mutableListOf(),
+    private val characters: MutableList<Character> = mutableListOf(),
     var whenSelected: (character: Character) -> Unit = {}
 ) : RecyclerView.Adapter<ListCharactersViewHolder>() {
 
@@ -23,10 +23,10 @@ class ListCharactersAdapter(
         return ListCharactersViewHolder(view)
     }
 
-    override fun getItemCount(): Int = charactersList.size
+    override fun getItemCount(): Int = characters.size
 
     override fun onBindViewHolder(holder: ListCharactersViewHolder, position: Int) {
-        val character = charactersList[position]
+        val character = characters[position]
 
         holder.setValues(context, character)
         holder.itemView.setOnClickListener {
@@ -35,19 +35,13 @@ class ListCharactersAdapter(
     }
 
     fun update(characters: List<Character>) {
-        val diffCallback = CharacterDiffCallback(this.charactersList, characters)
+        val diffCallback = CharacterDiffCallback(this.characters, characters)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
 
-        this.charactersList.clear()
-        this.charactersList.addAll(characters)
+        this.characters.clear()
+        this.characters.addAll(characters)
 
         diffResult.dispatchUpdatesTo(this)
-    }
-
-    fun replaceAllCharacters(characters: List<Character>) {
-        this.charactersList.clear()
-        this.charactersList.addAll(characters)
-        notifyDataSetChanged()
     }
 
 }
