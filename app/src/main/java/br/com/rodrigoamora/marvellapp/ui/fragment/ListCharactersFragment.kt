@@ -147,8 +147,7 @@ class ListCharactersFragment: Fragment() {
         bundle.putSerializable("character", character)
 
         val characterFragment = CharacterFragment()
-        //characterFragment.arguments = bundle
 
-        characterActivity.changeFragment(characterFragment, bundle, false)
+        characterActivity.changeFragment(characterFragment, bundle, true)
     }
 }
