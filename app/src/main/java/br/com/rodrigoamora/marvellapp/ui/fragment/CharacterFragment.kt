@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import br.com.rodrigoamora.marvellapp.R
-import br.com.rodrigoamora.marvellapp.extension.loadImage
+import br.com.rodrigoamora.marvellapp.extension.loadImageWithGlide
 import br.com.rodrigoamora.marvellapp.model.Character
 import br.com.rodrigoamora.marvellapp.ui.activity.CharacterActivity
 
@@ -54,7 +54,7 @@ class CharacterFragment: Fragment() {
         val character = arguments?.getSerializable("character") as Character
 
         val imageCharacterURL = "${character.thumbnail.path}.${character.thumbnail.extension}"
-        ivImageCharacter.loadImage(characterActivity, imageCharacterURL)
+        ivImageCharacter.loadImageWithGlide(characterActivity, imageCharacterURL)
 
         tvDescriptionCharacter.text = character.description
         tvNameCharacter.text = character.name
