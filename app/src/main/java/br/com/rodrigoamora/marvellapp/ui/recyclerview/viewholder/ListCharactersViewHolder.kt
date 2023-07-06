@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.rodrigoamora.marvellapp.R
-import br.com.rodrigoamora.marvellapp.extension.loadImageWithGlide
+import br.com.rodrigoamora.marvellapp.extension.loadCircleImageWithGlide
 import br.com.rodrigoamora.marvellapp.model.Character
 
 class ListCharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -18,7 +18,7 @@ class ListCharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVie
         val imageCharacterURL = "${character.thumbnail.path}.${character.thumbnail.extension}"
 
         ivCharacter = itemView.findViewById(R.id.iv_image_character)
-        ivCharacter.loadImageWithGlide(context, imageCharacterURL)
+        ivCharacter.loadCircleImageWithGlide(context, imageCharacterURL)
 
         tvNameCharacter = itemView.findViewById(R.id.tv_name_character_value)
         tvNameCharacter.text = character.name
