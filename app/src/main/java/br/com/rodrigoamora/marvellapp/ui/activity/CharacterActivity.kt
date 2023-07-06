@@ -42,6 +42,20 @@ class CharacterActivity : BaseActivity(),
         createShortcut()
     }
 
+    override fun onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+        } else {
+            val count = supportFragmentManager.backStackEntryCount
+            if (count == 0) {
+                finish()
+                moveTaskToBack(true)
+            } else {
+                supportFragmentManager.popBackStack()
+            }
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
