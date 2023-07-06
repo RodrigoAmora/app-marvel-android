@@ -1,6 +1,7 @@
 package br.com.rodrigoamora.marvellapp.ui.fragment
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import br.com.rodrigoamora.marvellapp.ui.activity.CharacterActivity
 import br.com.rodrigoamora.marvellapp.ui.recyclerview.adapter.ListCharactersAdapter
 import br.com.rodrigoamora.marvellapp.ui.recyclerview.paginate.CharacterPaginate
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 
 class ListCharactersFragment: Fragment() {
 
@@ -73,6 +75,7 @@ class ListCharactersFragment: Fragment() {
 
         swipeRefresh = root.findViewById(R.id.swipe_refresh)
         swipeRefresh.setOnRefreshListener {
+            playSound()
             getCharacters()
             swipeRefresh.isRefreshing = false
         }
@@ -116,6 +119,11 @@ class ListCharactersFragment: Fragment() {
 
     private fun configureAdapter() {
         adapter.whenSelected = this::viewDetails
+    }
+
+    private fun playSound() {
+        val mediaPlayer: MediaPlayer = MediaPlayer.create(characterActivity, R.raw.swipe_sound)
+        mediaPlayer.start()
     }
 
     fun populateRecyclerView(charactersList: List<Character>) {
