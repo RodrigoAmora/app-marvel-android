@@ -106,7 +106,7 @@ class ListCharactersFragment: Fragment() {
         recyclerViewCharacters.layoutManager = linearLayout
         recyclerViewCharacters.isNestedScrollingEnabled = true
         recyclerViewCharacters.scrollToPosition(adapter.itemCount - 1)
-        recyclerViewCharacters.setOnScrollListener(object : CharacterPaginate(linearLayout) {
+        recyclerViewCharacters.addOnScrollListener(object : CharacterPaginate(linearLayout) {
             override fun onLoadMore(currentPage: Int) {
                 offset += 20
                 getCharacters()
