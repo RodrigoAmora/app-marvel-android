@@ -10,7 +10,7 @@ import br.com.rodrigoamora.marvellapp.model.Character
 
 @Dao
 interface CharacterDao {
-    @Query("SELECT * FROM Character")
+    @Query("SELECT * FROM Character order by Character.name asc")
     fun findAll(): LiveData<List<Character>>
 
     @Insert(onConflict = REPLACE)
