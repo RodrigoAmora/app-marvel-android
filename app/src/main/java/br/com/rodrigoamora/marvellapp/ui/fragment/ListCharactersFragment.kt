@@ -17,7 +17,7 @@ import br.com.rodrigoamora.marvellapp.R
 import br.com.rodrigoamora.marvellapp.model.Character
 import br.com.rodrigoamora.marvellapp.ui.activity.CharacterActivity
 import br.com.rodrigoamora.marvellapp.ui.recyclerview.adapter.ListCharactersAdapter
-import br.com.rodrigoamora.marvellapp.ui.recyclerview.paginate.CharacterPaginate
+import br.com.rodrigoamora.marvellapp.ui.recyclerview.listener.RecyclerViewPaginateListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -109,7 +109,7 @@ class ListCharactersFragment: Fragment() {
         recyclerViewCharacters.layoutManager = linearLayout
         recyclerViewCharacters.isNestedScrollingEnabled = true
         recyclerViewCharacters.scrollToPosition(adapter.itemCount - 1)
-        recyclerViewCharacters.addOnScrollListener(object : CharacterPaginate(linearLayout) {
+        recyclerViewCharacters.addOnScrollListener(object : RecyclerViewPaginateListener(linearLayout) {
             override fun onLoadMore(currentPage: Int) {
                 offset += 20
                 getCharacters()

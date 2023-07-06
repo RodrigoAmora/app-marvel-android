@@ -1,9 +1,11 @@
-package br.com.rodrigoamora.marvellapp.ui.recyclerview.paginate
+package br.com.rodrigoamora.marvellapp.ui.recyclerview.listener
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class CharacterPaginate(private var linearLayoutManager: LinearLayoutManager?) : RecyclerView.OnScrollListener() {
+abstract class RecyclerViewPaginateListener(
+    private var linearLayoutManager: LinearLayoutManager?
+): RecyclerView.OnScrollListener() {
 
     var currentPage : Int = 1
     var loading = true
