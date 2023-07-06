@@ -89,10 +89,12 @@ class CharacterActivity : BaseActivity(),
                                     bundle)
     }
 
-    fun getCharacters() {
-        characterViewModel.getCharacters().observe(this,
+    fun getCharacters(offset: Int) {
+        characterViewModel.getCharacters(offset).observe(this,
             Observer { charactersList ->
-                charactersList.result?.let { listCharactersFragment.populateRecyclerView(it) }
+                charactersList.result?.let {
+                    listCharactersFragment.populateRecyclerView(it)
+                }
                 charactersList.error?.let { showError(it) }
 
                 if (!NetworkUtil.checkConnection(this)) {
@@ -106,7 +108,9 @@ class CharacterActivity : BaseActivity(),
         if (NetworkUtil.checkConnection(this)) {
             characterViewModel.getCharacterByName(name).observe(this,
                 Observer { charactersList ->
-                    charactersList.result?.let { listCharactersFragment.populateRecyclerView(it) }
+                    charactersList.result?.let {
+                        listCharactersFragment.populateRecyclerView(it)
+                    }
                     charactersList.error?.let { showError(it) }
                 }
             )

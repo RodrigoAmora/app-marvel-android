@@ -19,9 +19,9 @@ class CharacterRepositoryImpl(
 
     private val mediator = MediatorLiveData<Resource<List<Character>?>>()
 
-    override fun getCharacters(): LiveData<Resource<List<Character>?>> {
-        mediator.addSource(getCharactersFromDataBase()) { salonsFound ->
-            mediator.value = Resource(salonsFound)
+    override fun getCharacters(offset: Int): LiveData<Resource<List<Character>?>> {
+        mediator.addSource(getCharactersFromDataBase()) { charactersFound ->
+            mediator.value = Resource(charactersFound)
         }
 
 
@@ -36,7 +36,7 @@ class CharacterRepositoryImpl(
             mediator.value = newResource
         }
 
-        getCharacters(
+        getCharacters(offset,
             failure = { errorCode ->
                 failuresFromWebApiLiveData.value = Resource(result = null, error = errorCode)
             }
@@ -45,8 +45,8 @@ class CharacterRepositoryImpl(
         return mediator
     }
 
-    private fun getCharacters(failure: (errorCode: Int) -> Unit) {
-        characterWebClient.getCharacters(
+    private fun getCharacters(offset: Int, failure: (errorCode: Int) -> Unit) {
+        characterWebClient.getCharacters(offset,
             completion = { charactersList ->
                 charactersList?.data?.result?.let {
                     saveCharacters(it)

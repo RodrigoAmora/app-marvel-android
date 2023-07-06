@@ -13,13 +13,16 @@ interface CharacterService {
     @GET("characters")
     fun getCharacters(@Query("ts") ts: Int,
                       @Query("apikey") apikey: String,
-                      @Query("hash") hash: String): Call<CharacterResponse>
+                      @Query("hash") hash: String,
+                      @Query("limit") limit: Int,
+                      @Query("offset") offset: Int,
+                      @Query("orderBy") orderBy: String): Call<CharacterResponse>
 
     @GET("characters")
     fun getCharacterByName(@Query("ts") ts: Int,
-                            @Query("apikey") apikey: String,
-                            @Query("hash") hash: String,
-                            @Query("name") name: String): Call<CharacterResponse>
+                           @Query("apikey") apikey: String,
+                           @Query("hash") hash: String,
+                           @Query("name") name: String): Call<CharacterResponse>
 
     @GET("characters/{characterID}/comics")
     fun getComicsOfCharacters(@Path("characterID") characterID: Int,

@@ -35,10 +35,10 @@ class CharacterWebClient(
         })
     }
 
-    fun getCharacters(completion: (charactersList: CharacterResponse?) -> Unit,
+    fun getCharacters(offset: Int, completion: (charactersList: CharacterResponse?) -> Unit,
                       failure: (errorCode: Int) -> Unit) {
         executeRequest(
-            service.getCharacters(1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH),
+            service.getCharacters(1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH, 20, offset, "name"),
             completion = { charactersList ->
                 charactersList?.let {
                     completion(it)

@@ -16,6 +16,7 @@ import br.com.rodrigoamora.marvellapp.R
 import br.com.rodrigoamora.marvellapp.model.Character
 import br.com.rodrigoamora.marvellapp.ui.activity.CharacterActivity
 import br.com.rodrigoamora.marvellapp.ui.recyclerview.adapter.ListCharactersAdapter
+import br.com.rodrigoamora.marvellapp.ui.recyclerview.paginate.CharacterPaginate
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListCharactersFragment: Fragment() {
@@ -27,6 +28,7 @@ class ListCharactersFragment: Fragment() {
 
     private lateinit var adapter: ListCharactersAdapter
     private lateinit var characterActivity: CharacterActivity
+    private var offset = 0
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -90,6 +92,8 @@ class ListCharactersFragment: Fragment() {
         val linearLayout = LinearLayoutManager(activity,
             LinearLayoutManager.VERTICAL,
             false)
+        linearLayout.scrollToPosition(0)
+
         val dividerItemDecoration = DividerItemDecoration(activity,
             DividerItemDecoration.VERTICAL)
 
@@ -100,7 +104,14 @@ class ListCharactersFragment: Fragment() {
         recyclerViewCharacters.setHasFixedSize(true)
         recyclerViewCharacters.itemAnimator = DefaultItemAnimator()
         recyclerViewCharacters.layoutManager = linearLayout
-        recyclerViewCharacters.isNestedScrollingEnabled = false
+        recyclerViewCharacters.isNestedScrollingEnabled = true
+        recyclerViewCharacters.scrollToPosition(adapter.itemCount - 1)
+        recyclerViewCharacters.setOnScrollListener(object : CharacterPaginate(linearLayout) {
+            override fun onLoadMore(currentPage: Int) {
+                offset += 20
+                getCharacters()
+            }
+        })
     }
 
     private fun configureAdapter() {
@@ -112,7 +123,7 @@ class ListCharactersFragment: Fragment() {
     }
 
     private fun getCharacters() {
-        characterActivity.getCharacters()
+        characterActivity.getCharacters(offset)
     }
 
     private fun getCharacterByName(name: String) {

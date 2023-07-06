@@ -3,10 +3,13 @@ package br.com.rodrigoamora.marvellapp.ui.recyclerview.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import br.com.rodrigoamora.marvellapp.R
 import br.com.rodrigoamora.marvellapp.model.Character
+import br.com.rodrigoamora.marvellapp.ui.recyclerview.callback.CharacterDiffCallback
 import br.com.rodrigoamora.marvellapp.ui.recyclerview.viewholder.ListCharactersViewHolder
+
 
 class ListCharactersAdapter(
     private val context: Context,
@@ -31,9 +34,19 @@ class ListCharactersAdapter(
         }
     }
 
-    fun update(charactersList: List<Character>) {
+    fun update(characters: List<Character>) {
+        val diffCallback = CharacterDiffCallback(this.charactersList, characters)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
         this.charactersList.clear()
-        this.charactersList.addAll(charactersList)
+        this.charactersList.addAll(characters)
+
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun replaceAllCharacters(characters: List<Character>) {
+        this.charactersList.clear()
+        this.charactersList.addAll(characters)
         notifyDataSetChanged()
     }
 
