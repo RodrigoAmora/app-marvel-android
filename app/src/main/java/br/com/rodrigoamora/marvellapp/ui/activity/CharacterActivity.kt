@@ -105,11 +105,11 @@ class CharacterActivity : BaseActivity(),
 
     fun getCharacters(offset: Int) {
         characterViewModel.getCharacters(offset).observe(this,
-            Observer { charactersList ->
-                charactersList.result?.let {
+            Observer { characters ->
+                characters.result?.let {
                     listCharactersFragment.populateRecyclerView(it)
                 }
-                charactersList.error?.let { showError(it) }
+                characters.error?.let { showError(it) }
 
                 if (!NetworkUtil.checkConnection(this)) {
                     showToast(getString(R.string.error_no_internet))
@@ -121,11 +121,11 @@ class CharacterActivity : BaseActivity(),
     fun getCharacterByName(name: String) {
         if (NetworkUtil.checkConnection(this)) {
             characterViewModel.getCharacterByName(name).observe(this,
-                Observer { charactersList ->
-                    charactersList.result?.let {
+                Observer { characters ->
+                    characters.result?.let {
                         listCharactersFragment.populateRecyclerView(it)
                     }
-                    charactersList.error?.let { showError(it) }
+                    characters.error?.let { showError(it) }
                 }
             )
         } else {
