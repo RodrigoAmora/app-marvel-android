@@ -60,11 +60,7 @@ class ListCharactersFragment: Fragment() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
-                    if (it.isEmpty()) {
-                        getCharacters()
-                    } else {
-                        getCharacterByName(it)
-                    }
+                    getCharacterByName(it.trim())
                 }
                 return false
             }
@@ -132,6 +128,12 @@ class ListCharactersFragment: Fragment() {
     fun populateRecyclerView(characters: List<Character>) {
         this.characters = characters
         adapter.update(characters)
+    }
+
+    fun replaceRecyclerView(characters: List<Character>) {
+        this.characters = characters
+        searchView.visibility = View.GONE
+        adapter.replaceAll(characters)
     }
 
     private fun getCharacters() {

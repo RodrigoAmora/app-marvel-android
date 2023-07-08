@@ -44,4 +44,9 @@ class ListCharactersAdapter(
         diffResult.dispatchUpdatesTo(this)
     }
 
+    fun replaceAll(characters: List<Character>) {
+        this.characters.clear()
+        this.characters.addAll(characters)
+        notifyDataSetChanged()
+    }
 }
