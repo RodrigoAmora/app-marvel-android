@@ -17,6 +17,7 @@
     <string name="error_access_denied">Access Denied!</string>
     <string name="error_cant_was_possible_perform_operation">Can\'t was possible perform operation.</string>
     <string name="error_service_unavailable">Service unavailable, please try later.</string>
+
     <string name="error_no_internet">No internet!</string>
 
     <!-- SHORTCUT -->
@@ -28,6 +29,7 @@
     <string name="email_rodrigo_amora">rodrigo.amora.freitas@gmail.com</string>
 
     <!-- CHARACTER -->
-    <string name="character">Character: </string>
+    <string name="character">Character:</string>
+    <string name="no_character_whit_this_name">No character found with this name</string>
     <string name="search_character_by_name">Search character by name</string>
 </resources>

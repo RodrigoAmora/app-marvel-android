@@ -18,6 +18,7 @@
     <string name="error_access_denied">Acesso negado!</string>
     <string name="error_cant_was_possible_perform_operation">Não foi possível realizar a operação.</string>
     <string name="error_service_unavailable">Serviço indisponível, por favor tente mais tarde.</string>
+
     <string name="error_no_internet">Sem internet!</string>
 
     <!-- SHORTCUT -->
@@ -29,6 +30,7 @@
     <string name="email_rodrigo_amora">rodrigo.amora.freitas@gmail.com</string>
 
     <!-- CHARACTER -->
-    <string name="character">Personagen: </string>
+    <string name="character">Personagen:</string>
+    <string name="no_character_whit_this_name">Não foi encontrado nenhum personagem com este nome.</string>
     <string name="search_character_by_name">Buscar personagen pelo nome</string>
 </resources>
