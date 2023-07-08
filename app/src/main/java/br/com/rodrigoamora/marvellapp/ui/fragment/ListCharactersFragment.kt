@@ -30,6 +30,7 @@ class ListCharactersFragment: Fragment() {
 
     private lateinit var adapter: ListCharactersAdapter
     private lateinit var characterActivity: CharacterActivity
+    private lateinit var characters: List<Character>
     private var offset = 0
 
     @SuppressLint("MissingInflatedId")
@@ -111,8 +112,10 @@ class ListCharactersFragment: Fragment() {
         recyclerViewCharacters.scrollToPosition(adapter.itemCount - 1)
         recyclerViewCharacters.addOnScrollListener(object : RecyclerViewPaginateListener(linearLayout) {
             override fun onLoadMore(currentPage: Int) {
-                offset += 20
-                getCharacters()
+                if (characters.size >= 20) {
+                    offset += 20
+                    getCharacters()
+                }
             }
         })
     }
@@ -126,8 +129,9 @@ class ListCharactersFragment: Fragment() {
         mediaPlayer.start()
     }
 
-    fun populateRecyclerView(charactersList: List<Character>) {
-        adapter.update(charactersList)
+    fun populateRecyclerView(characters: List<Character>) {
+        this.characters = characters
+        adapter.update(characters)
     }
 
     private fun getCharacters() {
@@ -146,8 +150,6 @@ class ListCharactersFragment: Fragment() {
         val bundle = Bundle()
         bundle.putSerializable("character", character)
 
-        val characterFragment = CharacterFragment()
-
-        characterActivity.changeFragment(characterFragment, bundle, true)
+        characterActivity.changeFragment(CharacterFragment(), bundle, true)
     }
 }
