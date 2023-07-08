@@ -22,7 +22,7 @@ interface CharacterService {
     fun getCharacterByName(@Query("ts") ts: Int,
                            @Query("apikey") apikey: String,
                            @Query("hash") hash: String,
-                           @Query("name") name: String): Call<CharacterResponse>
+                           @Query("nameStartsWith") name: String): Call<CharacterResponse>
 
     @GET("characters/{characterID}/comics")
     fun getComicsOfCharacters(@Path("characterID") characterID: Int,
