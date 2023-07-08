@@ -123,7 +123,7 @@ class CharacterActivity : BaseActivity(),
             characterViewModel.getCharacterByName(name).observe(this,
                 Observer { characters ->
                     characters.result?.let {
-                        listCharactersFragment.populateRecyclerView(it)
+                        listCharactersFragment.replaceRecyclerView(it)
                     }
                     characters.error?.let { showError(it) }
                 }
