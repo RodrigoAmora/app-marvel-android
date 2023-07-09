@@ -50,7 +50,7 @@
         android:id="@+id/tv_conics"
         android:background="@android:color/darker_gray"
         android:paddingStart="@dimen/margin_start_and_end"
-        android:text="@string/character"
+        android:text="@string/comics"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_width="match_parent"
