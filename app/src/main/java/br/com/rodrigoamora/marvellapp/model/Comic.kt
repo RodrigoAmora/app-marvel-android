@@ -12,5 +12,8 @@ data class Comic(
     var id: Int,
 
     @SerializedName("title")
-    var title: String
+    var title: String,
+
+    @SerializedName("thumbnail")
+    var thumbnail: Thumbnail
 ): Serializable
