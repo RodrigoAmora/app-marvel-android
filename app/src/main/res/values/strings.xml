@@ -32,4 +32,10 @@
     <string name="character">Character:</string>
     <string name="no_character_whit_this_name">No character found with this name</string>
     <string name="search_character_by_name">Search character by name</string>
+
+    <!-- COMIC -->
+    <string name="comic">Comic:</string>
+    <string name="comics">Comics:</string>
+    <string name="comic_label">Comic</string>
+    <string name="comics_label">Comics</string>
 </resources>
