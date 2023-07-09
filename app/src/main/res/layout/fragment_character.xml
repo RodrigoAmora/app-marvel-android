@@ -46,4 +46,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_image_character" />
 
+    <TextView
+        android:id="@+id/tv_conics"
+        android:background="@android:color/darker_gray"
+        android:paddingStart="@dimen/margin_start_and_end"
+        android:text="@string/character"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_start_and_end"
+        android:layout_marginEnd="@dimen/margin_start_and_end"
+        android:layout_marginTop="@dimen/margin_top"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_description_character" />
+
+    <Spinner
+        android:id="@+id/sp_comics"
+        android:spinnerMode="dropdown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_start_and_end"
+        android:layout_marginEnd="@dimen/margin_start_and_end"
+        android:layout_marginTop="@dimen/margin_top"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_conics" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
