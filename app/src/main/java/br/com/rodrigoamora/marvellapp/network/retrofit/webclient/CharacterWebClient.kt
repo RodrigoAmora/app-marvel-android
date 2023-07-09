@@ -2,7 +2,6 @@ package br.com.rodrigoamora.marvellapp.network.retrofit.webclient
 
 import br.com.rodrigoamora.marvellapp.network.apikey.MarvelApiKey
 import br.com.rodrigoamora.marvellapp.network.response.CharacterResponse
-import br.com.rodrigoamora.marvellapp.network.response.ComicResponse
 import br.com.rodrigoamora.marvellapp.network.retrofit.service.CharacterService
 import retrofit2.Call
 import retrofit2.Callback
@@ -61,19 +60,4 @@ class CharacterWebClient(
             failure = { errorCode ->  failure(errorCode) }
         )
     }
-
-    fun getComicsOfCharacters(characterID: Int,
-                              completion: (comicResponse: ComicResponse?) -> Unit,
-                              failure: (errorCode: Int) -> Unit) {
-        executeRequest(
-            service.getComicsOfCharacters(characterID, 1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH),
-            completion = { comicResponse ->
-                comicResponse?.let {
-                    completion(it)
-                }
-            },
-            failure = { errorCode ->  failure(errorCode) }
-        )
-    }
-
 }
