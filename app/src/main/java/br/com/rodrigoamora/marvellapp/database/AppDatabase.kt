@@ -11,7 +11,7 @@ import br.com.rodrigoamora.marvellapp.model.Comic
 import br.com.rodrigoamora.marvellapp.model.Thumbnail
 
 @TypeConverters(Converters::class)
-@Database(entities = [Character::class, Comic::class, Thumbnail::class], version = 2, exportSchema = false)
+@Database(entities = [Character::class, Comic::class, Thumbnail::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun characterDao(): CharacterDao
