@@ -66,7 +66,7 @@ class CharacterRepositoryImpl(
     }
 
     private fun getCharacterByName(name: String,
-                                    failure: (errorCode: Int) -> Unit) {
+                                   failure: (errorCode: Int) -> Unit) {
         characterWebClient.getCharacterByName(name,
             completion = { charactersList ->
                 charactersList?.data?.result?.let {

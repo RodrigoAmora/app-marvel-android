@@ -25,7 +25,7 @@ interface CharacterService {
                            @Query("nameStartsWith") name: String): Call<CharacterResponse>
 
     @GET("characters/{characterID}/comics")
-    fun getComicsOfCharacters(@Path("characterID") characterID: Int,
+    fun getComicsOfCharacterId(@Path("characterID") characterID: Int,
                               @Query("ts") ts: Int,
                               @Query("apikey") apikey: String,
                               @Query("hash") hash: String): Call<ComicResponse>

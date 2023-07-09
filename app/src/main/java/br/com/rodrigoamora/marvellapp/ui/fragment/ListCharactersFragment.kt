@@ -149,9 +149,6 @@ class ListCharactersFragment: Fragment() {
     }
 
     private fun viewDetails(character: Character) {
-        val bundle = Bundle()
-        bundle.putSerializable("character", character)
-
-        characterActivity.changeFragment(CharacterFragment(), bundle, true)
+        characterActivity.viewDetails(character)
     }
 }

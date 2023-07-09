@@ -15,8 +15,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.rodrigoamora.marvellapp.R
 import br.com.rodrigoamora.marvellapp.factory.ShortcutFactory
+import br.com.rodrigoamora.marvellapp.model.Character
+import br.com.rodrigoamora.marvellapp.ui.fragment.CharacterFragment
 import br.com.rodrigoamora.marvellapp.ui.fragment.ListCharactersFragment
 import br.com.rodrigoamora.marvellapp.ui.viewmodel.CharacterViewModel
+import br.com.rodrigoamora.marvellapp.ui.viewmodel.ComicViewModel
 import br.com.rodrigoamora.marvellapp.util.FragmentUtil
 import br.com.rodrigoamora.marvellapp.util.NetworkUtil
 import com.google.android.material.navigation.NavigationView
@@ -29,7 +32,11 @@ class CharacterActivity : BaseActivity(),
     private lateinit var drawer: DrawerLayout
 
     private val characterViewModel: CharacterViewModel by viewModel()
+    private val comicViewModel: ComicViewModel by viewModel()
 
+    private val characterFragment: CharacterFragment by lazy {
+        CharacterFragment()
+    }
     private val listCharactersFragment: ListCharactersFragment by lazy {
         ListCharactersFragment()
     }
@@ -133,6 +140,25 @@ class CharacterActivity : BaseActivity(),
         }
     }
 
+    fun getComicsByCharacterId(characterId: Int) {
+        comicViewModel.getComicsByCharacterId(characterId).observe(this,
+            Observer{ comics ->
+                comics.result?.let {
+                    characterFragment.populateSpinner(it)
+                }
+                comics.error?.let {
+                    showError(it)
+                }
+            }
+        )
+    }
+
+    fun viewDetails(character: Character) {
+        val bundle = Bundle()
+        bundle.putSerializable("character", character)
+
+        changeFragment(characterFragment, bundle, true)
+    }
     @TargetApi(26)
     private fun createShortcut() {
         if (Build.VERSION.SDK_INT >= 26) {
