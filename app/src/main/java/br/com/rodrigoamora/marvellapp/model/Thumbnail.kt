@@ -23,4 +23,4 @@ data class Thumbnail(
 
     @SerializedName("path")
     var path: String
-)
+): Serializable
