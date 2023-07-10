@@ -12,6 +12,12 @@ import java.io.Serializable
         parentColumns = arrayOf("id"),
         childColumns = arrayOf("thumbnailId"),
         onDelete = ForeignKey.CASCADE
+    ),
+    ForeignKey(
+        entity = Comic::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("thumbnailId"),
+        onDelete = ForeignKey.CASCADE
     )]
 )
 data class Thumbnail(
