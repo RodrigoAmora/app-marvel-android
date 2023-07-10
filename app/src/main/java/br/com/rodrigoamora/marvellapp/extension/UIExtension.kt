@@ -12,3 +12,10 @@ fun ImageView.loadCircleImageWithGlide(context: Context, imageURL: String) {
         .circleCrop()
         .into(this)
 }
+
+fun ImageView.loadImageWithGlide(context: Context, imageURL: String) {
+    Glide.with(context)
+        .load(imageURL)
+        .placeholder(R.drawable.ic_menu_characters)
+        .into(this)
+}
