@@ -47,6 +47,7 @@ class CharacterFragment: Fragment() {
                 if (currentSelection > 1) {
                     val intent = Intent(characterActivity, ComicActivity::class.java)
                     intent.putExtra("comic", comics[position])
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(intent)
                 }
             }
@@ -60,15 +61,6 @@ class CharacterFragment: Fragment() {
         recoveryActivity()
         populateViews()
         getComicsByCharacterId()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        currentSelection = 0
-    }
-    override fun onStop() {
-        super.onStop()
-        currentSelection = 0
     }
 
     private fun recoveryActivity() {
@@ -93,6 +85,7 @@ class CharacterFragment: Fragment() {
         this.comics = comics
 
         val titles: MutableList<String> = mutableListOf()
+        titles.add(getString(R.string.comic_label))
         for (comic in comics) {
             titles.add(comic.title)
         }
