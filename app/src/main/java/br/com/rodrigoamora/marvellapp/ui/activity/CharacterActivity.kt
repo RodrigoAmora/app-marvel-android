@@ -34,9 +34,7 @@ class CharacterActivity : BaseActivity(),
     private val characterViewModel: CharacterViewModel by viewModel()
     private val comicViewModel: ComicViewModel by viewModel()
 
-    private val characterFragment: CharacterFragment by lazy {
-        CharacterFragment()
-    }
+    private lateinit var characterFragment: CharacterFragment
     private val listCharactersFragment: ListCharactersFragment by lazy {
         ListCharactersFragment()
     }
@@ -154,11 +152,13 @@ class CharacterActivity : BaseActivity(),
     }
 
     fun viewDetails(character: Character) {
+        characterFragment = CharacterFragment()
         val bundle = Bundle()
         bundle.putSerializable("character", character)
 
         changeFragment(characterFragment, bundle, true)
     }
+
     @TargetApi(26)
     private fun createShortcut() {
         if (Build.VERSION.SDK_INT >= 26) {
