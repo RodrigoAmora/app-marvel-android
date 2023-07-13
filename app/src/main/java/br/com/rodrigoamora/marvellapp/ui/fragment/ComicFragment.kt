@@ -1,4 +1,4 @@
-package br.com.rodrigoamora.marvellapp.ui.activity
+package br.com.rodrigoamora.marvellapp.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
