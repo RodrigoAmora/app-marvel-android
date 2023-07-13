@@ -2,7 +2,6 @@ package br.com.rodrigoamora.marvellapp.repository.impl
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import br.com.rodrigoamora.marvellapp.database.dao.CharacterDao
 import br.com.rodrigoamora.marvellapp.model.Character
 import br.com.rodrigoamora.marvellapp.network.retrofit.webclient.CharacterWebClient
@@ -24,21 +23,10 @@ class CharacterRepositoryImpl(
             mediator.value = Resource(charactersFound)
         }
 
-
-        val failuresFromWebApiLiveData = MutableLiveData<Resource<List<Character>?>>()
-        mediator.addSource(failuresFromWebApiLiveData) { resourceOfFailure ->
-            val currentResource = mediator.value
-            val newResource: Resource<List<Character>?> = if(currentResource != null) {
-                Resource(result = currentResource.result, error = resourceOfFailure.error)
-            } else {
-                resourceOfFailure
-            }
-            mediator.value = newResource
-        }
-
         getCharacters(offset,
             failure = { errorCode ->
-                failuresFromWebApiLiveData.value = Resource(result = null, error = errorCode)
+                val currentResource = mediator.value
+                mediator.value = Resource(result = currentResource?.result, error = errorCode)
             }
         )
 
