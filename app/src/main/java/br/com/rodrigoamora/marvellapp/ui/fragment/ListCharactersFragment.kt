@@ -7,21 +7,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import br.com.rodrigoamora.marvellapp.R
+import br.com.rodrigoamora.marvellapp.databinding.FragmentListCharactersBinding
 import br.com.rodrigoamora.marvellapp.model.Character
-import br.com.rodrigoamora.marvellapp.ui.activity.CharacterActivity
+import br.com.rodrigoamora.marvellapp.ui.activity.MainActivity
 import br.com.rodrigoamora.marvellapp.ui.recyclerview.adapter.ListCharactersAdapter
 import br.com.rodrigoamora.marvellapp.ui.recyclerview.listener.RecyclerViewPaginateListener
+import br.com.rodrigoamora.marvellapp.ui.viewmodel.CharacterViewModel
+import br.com.rodrigoamora.marvellapp.util.NetworkUtil
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class ListCharactersFragment: Fragment() {
+class ListCharactersFragment: BaseFragment() {
+
+    private var _binding: FragmentListCharactersBinding? = null
+    private val binding get() = _binding!!
+
+    private val characterViewModel: CharacterViewModel by viewModel()
 
     private lateinit var fabSearchCharacterByName: FloatingActionButton
     private lateinit var recyclerViewCharacters: RecyclerView
@@ -29,23 +39,19 @@ class ListCharactersFragment: Fragment() {
     private lateinit var swipeRefresh : SwipeRefreshLayout
 
     private lateinit var adapter: ListCharactersAdapter
-    private lateinit var characterActivity: CharacterActivity
+    private lateinit var mainActivity: MainActivity
     private lateinit var characters: List<Character>
     private var offset = 0
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(
-            R.layout.fragment_list_characters,
-            container,
-            false
-        )
+    ): View {
+        _binding = FragmentListCharactersBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
-        fabSearchCharacterByName = root.findViewById(R.id.fab_search_character_by_name)
+        fabSearchCharacterByName = binding.fabSearchCharacterByName
         fabSearchCharacterByName.setOnClickListener {
             if (searchView.visibility == View.GONE) {
                 searchView.visibility = View.VISIBLE
@@ -54,9 +60,9 @@ class ListCharactersFragment: Fragment() {
             }
         }
 
-        recyclerViewCharacters = root.findViewById(R.id.list_characters)
+        recyclerViewCharacters = binding.listCharacters
 
-        searchView = root.findViewById(R.id.sv_search_character_by_name)
+        searchView = binding.svSearchCharacterByName
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
@@ -70,7 +76,7 @@ class ListCharactersFragment: Fragment() {
             }
         })
 
-        swipeRefresh = root.findViewById(R.id.swipe_refresh)
+        swipeRefresh = binding.swipeRefresh
         swipeRefresh.setOnRefreshListener {
             playSound()
             getCharacters()
@@ -82,10 +88,15 @@ class ListCharactersFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getCharactersActivity()
+        recoveryActivity()
         configureRecyclerView()
         configureAdapter()
         getCharacters()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun configureRecyclerView() {
@@ -97,7 +108,7 @@ class ListCharactersFragment: Fragment() {
         val dividerItemDecoration = DividerItemDecoration(activity,
             DividerItemDecoration.VERTICAL)
 
-        adapter = ListCharactersAdapter(characterActivity.applicationContext)
+        adapter = ListCharactersAdapter(mainActivity.applicationContext)
 
         recyclerViewCharacters.adapter = adapter
         recyclerViewCharacters.addItemDecoration(dividerItemDecoration)
@@ -121,7 +132,7 @@ class ListCharactersFragment: Fragment() {
     }
 
     private fun playSound() {
-        val mediaPlayer: MediaPlayer = MediaPlayer.create(characterActivity, R.raw.swipe_sound)
+        val mediaPlayer: MediaPlayer = MediaPlayer.create(mainActivity, R.raw.swipe_sound)
         mediaPlayer.start()
     }
 
@@ -137,18 +148,46 @@ class ListCharactersFragment: Fragment() {
     }
 
     private fun getCharacters() {
-        characterActivity.getCharacters(offset)
+        characterViewModel.getCharacters(offset).observe(mainActivity,
+            Observer { characters ->
+                characters.result?.let {
+                    populateRecyclerView(it)
+                }
+                characters.error?.let { showError(mainActivity, it) }
+
+                if (!NetworkUtil.checkConnection(mainActivity)) {
+                    showToast(mainActivity, getString(R.string.error_no_internet))
+                }
+            }
+        )
     }
 
     private fun getCharacterByName(name: String) {
-        characterActivity.getCharacterByName(name)
+        if (NetworkUtil.checkConnection(mainActivity)) {
+            characterViewModel.getCharacterByName(name).observe(this,
+                Observer { characters ->
+                    characters.result?.let {
+                        replaceRecyclerView(it)
+                    }
+                    characters.error?.let { showError(mainActivity, it) }
+                }
+            )
+        } else {
+            showToast(mainActivity, getString(R.string.error_no_internet))
+        }
     }
 
-    private fun getCharactersActivity() {
-        characterActivity = activity as CharacterActivity
-    }
-
+    @SuppressLint("ResourceType")
     private fun viewDetails(character: Character) {
-        characterActivity.viewDetails(character)
+        val characterBundle = Bundle()
+        characterBundle.putSerializable("character", character)
+        Navigation.findNavController(recyclerViewCharacters)
+                .navigate(R.id.action_nav_list_characters_to_nav_character, characterBundle)
+
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun recoveryActivity() {
+        mainActivity = activity as MainActivity
     }
 }

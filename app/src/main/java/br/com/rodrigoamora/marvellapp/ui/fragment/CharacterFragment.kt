@@ -1,7 +1,6 @@
 package br.com.rodrigoamora.marvellapp.ui.fragment
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +10,23 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import br.com.rodrigoamora.marvellapp.R
+import br.com.rodrigoamora.marvellapp.databinding.FragmentCharacterBinding
 import br.com.rodrigoamora.marvellapp.extension.loadCircleImageWithGlide
 import br.com.rodrigoamora.marvellapp.model.Character
 import br.com.rodrigoamora.marvellapp.model.Comic
-import br.com.rodrigoamora.marvellapp.ui.activity.CharacterActivity
-import br.com.rodrigoamora.marvellapp.ui.activity.ComicActivity
+import br.com.rodrigoamora.marvellapp.ui.activity.MainActivity
+import br.com.rodrigoamora.marvellapp.ui.viewmodel.ComicViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CharacterFragment: Fragment() {
+class CharacterFragment: BaseFragment() {
+
+    private var _binding: FragmentCharacterBinding? = null
+    private val binding get() = _binding!!
+
+    private val comicViewModel: ComicViewModel by viewModel()
 
     private lateinit var ivImageCharacter: ImageView
     private lateinit var tvDescriptionCharacter: TextView
@@ -27,28 +34,27 @@ class CharacterFragment: Fragment() {
     private lateinit var spComics: Spinner
 
     private lateinit var character: Character
-    private lateinit var characterActivity: CharacterActivity
+    private lateinit var mainActivity: MainActivity
     private lateinit var comics: List<Comic>
     private var currentSelection: Int = 0
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.fragment_character, container, false)
+        _binding = FragmentCharacterBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
-        ivImageCharacter = root.findViewById(R.id.iv_image_character)
-        tvDescriptionCharacter = root.findViewById(R.id.tv_description_character)
-        tvNameCharacter = root.findViewById(R.id.tv_name_character)
-        spComics = root.findViewById(R.id.sp_comics)
+        ivImageCharacter = binding.ivImageCharacter
+        tvDescriptionCharacter = binding.tvDescriptionCharacter
+        tvNameCharacter = binding.tvNameCharacter
+
+        spComics = binding.spComics
         spComics.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 currentSelection++
                 if (currentSelection > 1) {
-                    val intent = Intent(characterActivity, ComicActivity::class.java)
-                    intent.putExtra("comic", comics[position])
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    startActivity(intent)
+                    viewComic(comics[position-1])
                 }
             }
         }
@@ -64,7 +70,7 @@ class CharacterFragment: Fragment() {
     }
 
     private fun recoveryActivity() {
-        characterActivity = activity as CharacterActivity
+        mainActivity = activity as MainActivity
     }
 
     private fun populateViews() {
@@ -78,7 +84,16 @@ class CharacterFragment: Fragment() {
     }
 
     private fun getComicsByCharacterId() {
-        characterActivity.getComicsByCharacterId(character.id)
+        comicViewModel.getComicsByCharacterId(character.id).observe(mainActivity,
+            Observer{ comics ->
+                comics.result?.let {
+                    populateSpinner(it)
+                }
+                comics.error?.let {
+                    showError(mainActivity, it)
+                }
+            }
+        )
     }
 
     fun populateSpinner(comics: List<Comic>) {
@@ -92,5 +107,13 @@ class CharacterFragment: Fragment() {
 
         val arrayAdapter = context?.let { ArrayAdapter<String>(it, android.R.layout.simple_list_item_1, titles) }
         spComics.adapter = arrayAdapter
+    }
+
+    private fun viewComic(comic: Comic) {
+        val comicBundle = Bundle()
+        comicBundle.putSerializable("comic", comic)
+        Navigation.findNavController(spComics)
+            .navigate(R.id.action_nav_character_to_nav_comic, comicBundle)
+
     }
 }
