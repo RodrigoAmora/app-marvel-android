@@ -1,6 +1,7 @@
 package br.com.rodrigoamora.marvellapp.di
 
 import androidx.room.Room
+import br.com.rodrigoamora.marvellapp.BuildConfig
 import br.com.rodrigoamora.marvellapp.database.AppDatabase
 import br.com.rodrigoamora.marvellapp.repository.CharacterRepository
 import br.com.rodrigoamora.marvellapp.repository.impl.CharacterRepositoryImpl
@@ -50,12 +51,12 @@ val repositoryModule = module {
 }
 
 val retrofitModule = module {
-    single { AppRetrofit().instantiateRetrofit() }
+    single { AppRetrofit("").instantiateRetrofit() }
 }
 
 val servicesModule = module {
-    single { AppRetrofit().characterService() }
-    single { AppRetrofit().comicService() }
+    single { AppRetrofit(BuildConfig.MARVEL_BASE_URL).characterService() }
+    single { AppRetrofit(BuildConfig.MARVEL_BASE_URL).comicService() }
 }
 
 val viewModelModule = module {
