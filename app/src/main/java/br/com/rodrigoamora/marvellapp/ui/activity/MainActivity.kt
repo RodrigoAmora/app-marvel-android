@@ -1,6 +1,10 @@
 package br.com.rodrigoamora.marvellapp.ui.activity
 
 import android.annotation.SuppressLint
+import android.annotation.TargetApi
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,6 +19,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import br.com.rodrigoamora.marvellapp.R
 import br.com.rodrigoamora.marvellapp.databinding.ActivityMainBinding
+import br.com.rodrigoamora.marvellapp.factory.ShortcutFactory
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
@@ -72,5 +77,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         TODO("Not yet implemented")
+    }
+
+    @TargetApi(26)
+    private fun createShortcut() {
+        if (Build.VERSION.SDK_INT >= 26) {
+            val shortcutManager = getSystemService(ShortcutManager::class.java)
+            val shortLabels = arrayOf<String>(
+                getString(R.string.shortcut_characters),
+                getString(R.string.shortcut_comics)
+            )
+
+            val icons = arrayOf<Int>(
+                R.drawable.ic_menu_characters,
+                R.drawable.ic_menu_comics
+            )
+            val shortcutInfoList: List<ShortcutInfo?> = ShortcutFactory.createShortcutInfo(this,
+                shortLabels,
+                icons)
+
+            shortcutManager.dynamicShortcuts = shortcutInfoList
+        }
     }
 }
