@@ -6,7 +6,7 @@ import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.graphics.drawable.Icon
 import br.com.rodrigoamora.marvellapp.R
-import br.com.rodrigoamora.marvellapp.ui.activity.CharacterActivity
+import br.com.rodrigoamora.marvellapp.ui.activity.MainActivity
 
 
 class ShortcutFactory {
@@ -22,15 +22,10 @@ class ShortcutFactory {
             for (i in shortLabels.indices) {
                 val intent = when(shortLabels[i]) {
                     context.getString(R.string.shortcut_characters) -> {
-                        Intent(context, CharacterActivity::class.java)
+                        Intent(context, MainActivity::class.java)
                     }
-                    /*
-                    context.getString(R.string.shortcut_comics) -> {
-                        Intent(context, CharacterActivity::class.java)
-                    }
-                    */
                     else -> {
-                        Intent(context, CharacterActivity::class.java)
+                        Intent(context, MainActivity::class.java)
                     }
                 }
                 intent.action = Intent.ACTION_VIEW
