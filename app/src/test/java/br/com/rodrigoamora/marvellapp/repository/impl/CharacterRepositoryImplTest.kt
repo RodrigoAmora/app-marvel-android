@@ -5,10 +5,8 @@ import br.com.rodrigoamora.marvellapp.model.Character
 import br.com.rodrigoamora.marvellapp.model.Thumbnail
 import br.com.rodrigoamora.marvellapp.network.retrofit.AppRetrofit
 import br.com.rodrigoamora.marvellapp.network.retrofit.webclient.CharacterWebClient
-import br.com.rodrigoamora.marvellapp.repository.CharacterRepository
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 internal class CharacterRepositoryImplTest {

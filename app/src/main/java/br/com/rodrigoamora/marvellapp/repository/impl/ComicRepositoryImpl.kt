@@ -3,9 +3,7 @@ package br.com.rodrigoamora.marvellapp.repository.impl
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import br.com.rodrigoamora.marvellapp.database.dao.ComicDao
-import br.com.rodrigoamora.marvellapp.model.Character
 import br.com.rodrigoamora.marvellapp.model.Comic
-import br.com.rodrigoamora.marvellapp.network.retrofit.webclient.CharacterWebClient
 import br.com.rodrigoamora.marvellapp.network.retrofit.webclient.ComicWebClient
 import br.com.rodrigoamora.marvellapp.repository.ComicRepository
 import br.com.rodrigoamora.marvellapp.repository.Resource
