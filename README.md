@@ -10,8 +10,11 @@ O App usa as seguintes dependências:
 * Coroutines
 * Glide
 * Koin
-* LifeCycle
+* Life Cycle
+* Liva Data
 * Material Design
+* MokK
+* Navigation
 * Retrofit
 * Room
 * ViewModel
