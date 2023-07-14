@@ -18,6 +18,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+        buildConfigField "String","MARVEL_BASE_URL","\"${properties.getProperty("MARVEL_BASE_URL")}\""
+        buildConfigField "String","MARVEL_API_KEY","\"${properties.getProperty("MARVEL_API_KEY")}\""
+        buildConfigField "String","MARVEL_MD5_HASH","\"${properties.getProperty("MARVEL_MD5_HASH")}\""
     }
 
     buildTypes {
@@ -34,11 +41,12 @@ android {
         jvmTarget = '17'
     }
     buildFeatures {
+        buildConfig true
         viewBinding true
     }
-//    viewBinding {
-//        enabled = true
-//    }
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -46,17 +54,17 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.21"
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21'
 
+    // ANDROID X
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation "androidx.activity:activity-ktx:1.7.2"
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+
     // CONSTRAINT LAYOUT
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
 
     // COROUTINES
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
-
-    // ANDROID X
-    implementation 'androidx.core:core-ktx:1.10.1'
-    implementation "androidx.activity:activity-ktx:1.7.2"
-    implementation 'androidx.appcompat:appcompat:1.6.1'
 
     // GLIDE
     implementation 'com.github.bumptech.glide:glide:4.15.1'
@@ -88,7 +96,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 
-    //ROOM
+    // ROOM
     implementation "androidx.room:room-ktx:2.4.0-alpha03"
     implementation "androidx.room:room-runtime:2.4.0-alpha03"
     kapt "androidx.room:room-compiler:2.4.0-alpha03"
@@ -102,16 +110,16 @@ dependencies {
     
     // LIBS FOR TEST
 
-    // JUNIT
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    // COROUTINES-TEST
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1"
 
     // ESPRESSO
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+    // JUNIT
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+
     // MOK K
     testImplementation "io.mockk:mockk:1.12.3"
-
-    // COROUTINES-TEST
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1"
 }

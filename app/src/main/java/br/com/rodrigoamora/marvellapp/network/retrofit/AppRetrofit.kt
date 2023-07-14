@@ -8,7 +8,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class AppRetrofit {
+class AppRetrofit(
+    private val baseURL: String
+) {
 
     private val client by lazy {
         val interceptor = HttpLoggingInterceptor()
@@ -21,7 +23,6 @@ class AppRetrofit {
             .build()
     }
     private val retrofit by lazy {
-        val baseURL = "https://gateway.marvel.com/v1/public/"
         Retrofit.Builder()
             .baseUrl(baseURL)
             .addConverterFactory(GsonConverterFactory.create())
