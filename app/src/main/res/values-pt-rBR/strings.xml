@@ -12,6 +12,7 @@
     <string name="action_settings">Configurações</string>
 
     <string name="menu_characters">Personagens</string>
+    <string name="menu_list_characters">Lista de Personagens</string>
     <string name="menu_comics">HQs</string>
 
     <!-- ERROR MESSAGES-->

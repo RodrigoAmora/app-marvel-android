@@ -11,6 +11,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_characters">Characters</string>
+    <string name="menu_list_characters">List Characters</string>
     <string name="menu_comics">Comics</string>
 
     <!-- ERROR MESSAGES-->
