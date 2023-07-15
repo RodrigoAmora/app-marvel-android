@@ -1,6 +1,5 @@
 package br.com.rodrigoamora.marvellapp.ui.activity
 
-import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
@@ -20,47 +19,18 @@ import br.com.rodrigoamora.marvellapp.R
 import br.com.rodrigoamora.marvellapp.databinding.ActivityMainBinding
 import br.com.rodrigoamora.marvellapp.factory.ShortcutFactory
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navView: NavigationView
 
-    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val toolbar = binding.appBarMain.toolbar
-        setSupportActionBar(toolbar)
-
-        val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-
-        val toggle = ActionBarDrawerToggle(
-            this,
-            drawerLayout, toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        navView.setNavigationItemSelectedListener(this)
-        navView.itemIconTintList = null
-
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_characters, R.id.nav_comics
-            ), drawerLayout
-        )
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        instantiateBinding()
+        setupToolbarNavigationViewNavController()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -75,6 +45,42 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         TODO("Not yet implemented")
+    }
+
+    private fun instantiateBinding() {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
+
+    private fun setupToolbarNavigationViewNavController() {
+        val toolbar = binding.appBarMain.toolbar
+        setSupportActionBar(toolbar)
+
+        val drawerLayout: DrawerLayout = binding.drawerLayout
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawerLayout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navView = binding.navView
+        navView.setNavigationItemSelectedListener(this)
+        navView.itemIconTintList = null
+
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_list_characters, R.id.nav_comics
+            ), drawerLayout
+        )
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
     @TargetApi(26)
