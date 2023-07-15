@@ -36,7 +36,7 @@ val databaseModule = module {
         Room.databaseBuilder(
             get(),
             AppDatabase::class.java,
-            "app-marvel-database")
+            BuildConfig.DATABASE_NAME)
             .fallbackToDestructiveMigration()
             .build()
     }
