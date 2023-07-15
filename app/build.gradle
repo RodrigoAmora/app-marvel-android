@@ -27,10 +27,21 @@ android {
         buildConfigField "String","MARVEL_MD5_HASH","\"${properties.getProperty("MARVEL_MD5_HASH")}\""
     }
 
+    testBuildType = 'uiTest'
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField("String", "DATABASE_NAME", '"app-marvel-database.db"')
+        }
+        debug{
+            buildConfigField("String", "DATABASE_NAME", '"app-marvel-database-dev.db"')
+        }
+        uiTest {
+            initWith(buildTypes.debug)
+            buildConfigField("String", "DATABASE_NAME", '"app-marvel-database-test.db"')
         }
     }
     compileOptions {
@@ -108,7 +119,7 @@ dependencies {
     // SWIPE REFRESH
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
     
-    // LIBS FOR TEST
+    ///// LIBS FOR TEST /////
 
     // COROUTINES-TEST
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1"
@@ -116,10 +127,17 @@ dependencies {
     // ESPRESSO
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+
+    // FRAGMENT TESTING
+    debugImplementation("androidx.fragment:fragment-testing:1.6.0")
+
     // JUNIT
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 
     // MOK K
     testImplementation "io.mockk:mockk:1.12.3"
+
+    // RECYCLERVIEW MATCHER
+    androidTestImplementation 'com.github.levibostian:RecyclerViewMatcher:0.1.0'
 }
