@@ -14,7 +14,7 @@ O App usa as seguintes dependências:
 * Koin
 * jUnit
 * Life Cycle
-* Liva Data
+* Live Data
 * Material Design
 * MokK
 * Navigation
