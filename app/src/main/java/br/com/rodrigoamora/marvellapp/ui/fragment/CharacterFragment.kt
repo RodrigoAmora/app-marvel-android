@@ -35,7 +35,8 @@ class CharacterFragment: BaseFragment() {
 
     private lateinit var character: Character
     private lateinit var mainActivity: MainActivity
-    private lateinit var comics: List<Comic>
+    private val comics: MutableList<Comic> = mutableListOf()
+    private val titles: MutableList<String> = mutableListOf()
     private var currentSelection: Int = 0
 
     @SuppressLint("MissingInflatedId")
@@ -69,6 +70,11 @@ class CharacterFragment: BaseFragment() {
         getComicsByCharacterId()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun recoveryActivity() {
         mainActivity = activity as MainActivity
     }
@@ -84,9 +90,11 @@ class CharacterFragment: BaseFragment() {
     }
 
     private fun getComicsByCharacterId() {
-        comicViewModel.getComicsByCharacterId(character.id).observe(mainActivity,
+        val id = character.id
+        comicViewModel.getComicsByCharacterId(id).observe(mainActivity,
             Observer{ comics ->
                 comics.result?.let {
+                    currentSelection = 0
                     populateSpinner(it)
                 }
                 comics.error?.let {
@@ -96,11 +104,12 @@ class CharacterFragment: BaseFragment() {
         )
     }
 
-    fun populateSpinner(comics: List<Comic>) {
-        this.comics = comics
+    private fun populateSpinner(comics: List<Comic>) {
+        this.comics.clear()
+        this.comics.addAll(comics)
 
-        val titles: MutableList<String> = mutableListOf()
-        titles.add(getString(R.string.comic_label))
+        titles.clear()
+        titles.add(mainActivity.getString(R.string.comic_label))
         for (comic in comics) {
             titles.add(comic.title)
         }
