@@ -21,7 +21,7 @@ class MainActivityTest {
     private lateinit var context: Context
 
     @Before
-    fun aaa() {
+    fun init() {
         ActivityScenario.launch(MainActivity::class.java)
         context = InstrumentationRegistry.getInstrumentation().targetContext
     }
@@ -29,7 +29,8 @@ class MainActivityTest {
     @Test
     fun testShouldShowAppName() {
         Espresso
-            .onView(ViewMatchers.withText(context.getString(R.string.menu_list_characters)))
+            .onView(ViewMatchers.withId(R.id.nav_view))
+            .check(ViewAssertions.matches(ViewMatchers.withText(context.getString(R.string.app_name))))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
