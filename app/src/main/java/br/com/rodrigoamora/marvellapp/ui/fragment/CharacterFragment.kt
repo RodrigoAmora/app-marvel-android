@@ -39,7 +39,6 @@ class CharacterFragment: BaseFragment() {
     private val titles: MutableList<String> = mutableListOf()
     private var currentSelection: Int = 0
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentCharacterBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -72,7 +71,7 @@ class CharacterFragment: BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        //_binding = null
     }
 
     private fun recoveryActivity() {
