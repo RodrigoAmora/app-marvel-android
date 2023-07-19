@@ -39,4 +39,10 @@
         android:label="@string/app_name"
         tools:layout="@layout/fragment_comic" />
 
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="br.com.rodrigoamora.marvellapp.ui.fragment.AboutFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_about" />
+
 </navigation>
