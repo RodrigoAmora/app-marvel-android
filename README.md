@@ -9,6 +9,7 @@ O App usa as seguintes dependências:
 * Constraint Layout
 * Coroutines
 * Coroutines Test
+* Espresso
 * Fragment Testing
 * Glide
 * Koin
