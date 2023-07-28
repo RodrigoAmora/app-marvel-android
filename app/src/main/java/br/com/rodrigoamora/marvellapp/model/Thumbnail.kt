@@ -29,4 +29,8 @@ data class Thumbnail(
 
     @SerializedName("path")
     var path: String
-): Serializable
+): Serializable {
+    fun formatURL(): String {
+        return "${path}.${extension}"
+    }
+}
