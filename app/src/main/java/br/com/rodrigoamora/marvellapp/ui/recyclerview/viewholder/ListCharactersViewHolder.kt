@@ -15,7 +15,7 @@ class ListCharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVie
     lateinit var tvNameCharacter: TextView
 
     fun setValues(context: Context, character: Character) {
-        val imageCharacterURL = "${character.thumbnail.path}.${character.thumbnail.extension}"
+        val imageCharacterURL = character.thumbnail.formatURL()
 
         ivCharacter = itemView.findViewById(R.id.iv_image_character)
         ivCharacter.loadCircleImageWithGlide(context, imageCharacterURL)

@@ -1,6 +1,5 @@
 package br.com.rodrigoamora.marvellapp.ui.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -71,7 +70,7 @@ class CharacterFragment: BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        //_binding = null
+        _binding = null
     }
 
     private fun recoveryActivity() {
@@ -81,7 +80,7 @@ class CharacterFragment: BaseFragment() {
     private fun populateViews() {
         character = arguments?.getSerializable("character") as Character
 
-        val imageCharacterURL = "${character.thumbnail.path}.${character.thumbnail.extension}"
+        val imageCharacterURL = character.thumbnail.formatURL()
         context?.let { ivImageCharacter.loadCircleImageWithGlide(it, imageCharacterURL) }
 
         tvDescriptionCharacter.text = character.description

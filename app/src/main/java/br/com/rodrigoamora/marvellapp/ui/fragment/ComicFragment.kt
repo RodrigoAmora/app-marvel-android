@@ -42,8 +42,8 @@ class ComicFragment: Fragment() {
         tvTitleComic.text = comic.title
         tvDescriptionComic.text = comic.description
 
-        val imageCharacterURL = "${comic.thumbnail.path}.${comic.thumbnail.extension}"
-        context?.let { ivImageComic.loadImageWithGlide(it, imageCharacterURL) }
+        val imageComicURL = comic.thumbnail.formatURL()
+        context?.let { ivImageComic.loadImageWithGlide(it, imageComicURL) }
     }
 
 }
