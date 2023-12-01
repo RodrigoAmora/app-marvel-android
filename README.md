@@ -1,6 +1,6 @@
 # app-marvel-android
 App que consulta a API da Marvel usando a arquitetura MVVM, Injeção de Dependências, Persistência dos dados off-line, Teste de Integração e Teste de UI.<br>
-O App roda a partir do Android 7.0 (API Level 24).
+O App roda a partir do Android 8.0 (API Level 26).
 
 <hr>
 
