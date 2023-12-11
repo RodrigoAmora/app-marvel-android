@@ -48,22 +48,22 @@ class ListCharactersFragment: BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentListCharactersBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        this._binding = FragmentListCharactersBinding.inflate(inflater, container, false)
+        val root: View = this.binding.root
 
-        fabSearchCharacterByName = binding.fabSearchCharacterByName
-        fabSearchCharacterByName.setOnClickListener {
-            if (searchView.visibility == View.GONE) {
-                searchView.visibility = View.VISIBLE
+        this.fabSearchCharacterByName = binding.fabSearchCharacterByName
+        this.fabSearchCharacterByName.setOnClickListener {
+            if (this.searchView.visibility == View.GONE) {
+                this.searchView.visibility = View.VISIBLE
             } else {
-                searchView.visibility = View.GONE
+                this.searchView.visibility = View.GONE
             }
         }
 
-        recyclerViewCharacters = binding.listCharacters
+        this.recyclerViewCharacters = this.binding.listCharacters
 
-        searchView = binding.svSearchCharacterByName
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        this.searchView = this.binding.svSearchCharacterByName
+        this.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
                     getCharacterByName(it.trim())
@@ -76,11 +76,11 @@ class ListCharactersFragment: BaseFragment() {
             }
         })
 
-        swipeRefresh = binding.swipeRefresh
-        swipeRefresh.setOnRefreshListener {
-            playSound()
-            getCharacters()
-            swipeRefresh.isRefreshing = false
+        this.swipeRefresh = this.binding.swipeRefresh
+        this.swipeRefresh.setOnRefreshListener {
+            this.playSound()
+            this.getCharacters()
+            this.swipeRefresh.isRefreshing = false
         }
 
         return root
@@ -88,36 +88,36 @@ class ListCharactersFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recoveryActivity()
-        configureRecyclerView()
-        configureAdapter()
-        getCharacters()
+        this.recoveryActivity()
+        this.configureRecyclerView()
+        this.configureAdapter()
+        this.getCharacters()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        this._binding = null
     }
 
     private fun configureRecyclerView() {
-        val linearLayout = LinearLayoutManager(activity,
+        val linearLayout = LinearLayoutManager(this.mainActivity,
             LinearLayoutManager.VERTICAL,
             false)
         linearLayout.scrollToPosition(0)
 
-        val dividerItemDecoration = DividerItemDecoration(activity,
+        val dividerItemDecoration = DividerItemDecoration(this.mainActivity,
             DividerItemDecoration.VERTICAL)
 
-        adapter = ListCharactersAdapter(mainActivity.applicationContext)
+        this.adapter = ListCharactersAdapter(this.mainActivity.applicationContext)
 
-        recyclerViewCharacters.adapter = adapter
-        recyclerViewCharacters.addItemDecoration(dividerItemDecoration)
-        recyclerViewCharacters.setHasFixedSize(true)
-        recyclerViewCharacters.itemAnimator = DefaultItemAnimator()
-        recyclerViewCharacters.layoutManager = linearLayout
-        recyclerViewCharacters.isNestedScrollingEnabled = true
-        recyclerViewCharacters.scrollToPosition(adapter.itemCount - 1)
-        recyclerViewCharacters.addOnScrollListener(object : RecyclerViewPaginateListener(linearLayout) {
+        this.recyclerViewCharacters.adapter = this.adapter
+        this.recyclerViewCharacters.addItemDecoration(dividerItemDecoration)
+        this.recyclerViewCharacters.setHasFixedSize(true)
+        this.recyclerViewCharacters.itemAnimator = DefaultItemAnimator()
+        this.recyclerViewCharacters.layoutManager = linearLayout
+        this.recyclerViewCharacters.isNestedScrollingEnabled = true
+        this.recyclerViewCharacters.scrollToPosition(adapter.itemCount - 1)
+        this.recyclerViewCharacters.addOnScrollListener(object : RecyclerViewPaginateListener(linearLayout) {
             override fun onLoadMore(currentPage: Int) {
                 if (characters.size >= 20) {
                     offset += 20
@@ -128,27 +128,27 @@ class ListCharactersFragment: BaseFragment() {
     }
 
     private fun configureAdapter() {
-        adapter.whenSelected = this::viewDetails
+        this.adapter.whenSelected = this::viewDetails
     }
 
     private fun playSound() {
-        val mediaPlayer: MediaPlayer = MediaPlayer.create(mainActivity, R.raw.swipe_sound)
+        val mediaPlayer: MediaPlayer = MediaPlayer.create(this.mainActivity, R.raw.swipe_sound)
         mediaPlayer.start()
     }
 
-    fun populateRecyclerView(characters: List<Character>) {
+    private fun populateRecyclerView(characters: List<Character>) {
         this.characters = characters
-        adapter.update(characters)
+        this.adapter.update(characters)
     }
 
-    fun replaceRecyclerView(characters: List<Character>) {
+    private fun replaceRecyclerView(characters: List<Character>) {
         this.characters = characters
-        searchView.visibility = View.GONE
-        adapter.replaceAll(characters)
+        this.searchView.visibility = View.GONE
+        this.adapter.replaceAll(characters)
     }
 
     private fun getCharacters() {
-        characterViewModel.getCharacters(offset).observe(mainActivity,
+        this.characterViewModel.getCharacters(this.offset).observe(this.mainActivity,
             Observer { characters ->
                 characters.result?.let {
                     populateRecyclerView(it)
@@ -163,8 +163,8 @@ class ListCharactersFragment: BaseFragment() {
     }
 
     private fun getCharacterByName(name: String) {
-        if (NetworkUtil.checkConnection(mainActivity)) {
-            characterViewModel.getCharacterByName(name).observe(this,
+        if (NetworkUtil.checkConnection(this.mainActivity)) {
+            this.characterViewModel.getCharacterByName(name).observe(this,
                 Observer { characters ->
                     characters.result?.let {
                         replaceRecyclerView(it)
@@ -173,7 +173,7 @@ class ListCharactersFragment: BaseFragment() {
                 }
             )
         } else {
-            showToast(mainActivity, getString(R.string.error_no_internet))
+            showToast(this.mainActivity, getString(R.string.error_no_internet))
         }
     }
 
@@ -188,6 +188,6 @@ class ListCharactersFragment: BaseFragment() {
 
     @SuppressLint("RestrictedApi")
     private fun recoveryActivity() {
-        mainActivity = activity as MainActivity
+        this.mainActivity = activity as MainActivity
     }
 }
