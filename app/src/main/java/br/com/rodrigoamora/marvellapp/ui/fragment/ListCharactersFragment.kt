@@ -182,8 +182,7 @@ class ListCharactersFragment: BaseFragment() {
         val characterBundle = Bundle()
         characterBundle.putSerializable("character", character)
         Navigation.findNavController(recyclerViewCharacters)
-                .navigate(R.id.action_nav_list_characters_to_nav_character, characterBundle)
-
+                  .navigate(R.id.action_nav_list_characters_to_nav_character, characterBundle)
     }
 
     @SuppressLint("RestrictedApi")
