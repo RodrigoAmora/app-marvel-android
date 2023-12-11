@@ -17,8 +17,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MarvellApp"
-        tools:targetApi="31">
+        android:theme="@style/Theme.MarvellApp">
 
         <!-- ACTIVITIES -->
         <activity
