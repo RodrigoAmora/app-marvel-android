@@ -39,15 +39,15 @@ class CharacterFragment: BaseFragment() {
     private var currentSelection: Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentCharacterBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        this._binding = FragmentCharacterBinding.inflate(inflater, container, false)
+        val root: View = this.binding.root
 
-        ivImageCharacter = binding.ivImageCharacter
-        tvDescriptionCharacter = binding.tvDescriptionCharacter
-        tvNameCharacter = binding.tvNameCharacter
+        this.ivImageCharacter = this.binding.ivImageCharacter
+        this.tvDescriptionCharacter = this.binding.tvDescriptionCharacter
+        this.tvNameCharacter = this.binding.tvNameCharacter
 
-        spComics = binding.spComics
-        spComics.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        this.spComics = this.binding.spComics
+        this.spComics.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -63,33 +63,34 @@ class CharacterFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recoveryActivity()
-        populateViews()
-        getComicsByCharacterId()
+        this.recoveryActivity()
+        this.populateViews()
+        this.loadSpinner()
+        this.getComicsByCharacterId()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        this._binding = null
     }
 
     private fun recoveryActivity() {
-        mainActivity = activity as MainActivity
+        this.mainActivity = activity as MainActivity
     }
 
     private fun populateViews() {
-        character = arguments?.getSerializable("character") as Character
+        this.character = arguments?.getSerializable("character") as Character
 
-        val imageCharacterURL = character.thumbnail.formatURL()
-        context?.let { ivImageCharacter.loadCircleImageWithGlide(it, imageCharacterURL) }
+        val imageCharacterURL = this.character.thumbnail.formatURL()
+        this.ivImageCharacter.loadCircleImageWithGlide(this.mainActivity, imageCharacterURL)
 
-        tvDescriptionCharacter.text = character.description
-        tvNameCharacter.text = character.name
+        this.tvDescriptionCharacter.text = this.character.description
+        this.tvNameCharacter.text = this.character.name
     }
 
     private fun getComicsByCharacterId() {
-        val id = character.id
-        comicViewModel.getComicsByCharacterId(id).observe(mainActivity,
+        val id = this.character.id
+        this.comicViewModel.getComicsByCharacterId(id).observe(mainActivity,
             Observer{ comics ->
                 comics.result?.let {
                     currentSelection = 0
@@ -102,25 +103,30 @@ class CharacterFragment: BaseFragment() {
         )
     }
 
+    private fun loadSpinner() {
+        this.titles.add(mainActivity.getString(R.string.comic_label))
+        val arrayAdapter = context?.let { ArrayAdapter<String>(it, android.R.layout.simple_list_item_1, titles) }
+        this.spComics.adapter = arrayAdapter
+    }
+
     private fun populateSpinner(comics: List<Comic>) {
         this.comics.clear()
         this.comics.addAll(comics)
 
-        titles.clear()
-        titles.add(mainActivity.getString(R.string.comic_label))
-        for (comic in comics) {
-            titles.add(comic.title)
+        this.titles.clear()
+        this.titles.add(mainActivity.getString(R.string.comic_label))
+        for (comic in this.comics) {
+            this.titles.add(comic.title)
         }
 
         val arrayAdapter = context?.let { ArrayAdapter<String>(it, android.R.layout.simple_list_item_1, titles) }
-        spComics.adapter = arrayAdapter
+        this.spComics.adapter = arrayAdapter
     }
 
     private fun viewComic(comic: Comic) {
         val comicBundle = Bundle()
         comicBundle.putSerializable("comic", comic)
-        Navigation.findNavController(spComics)
-            .navigate(R.id.action_nav_character_to_nav_comic, comicBundle)
-
+        Navigation.findNavController(this.spComics)
+                    .navigate(R.id.action_nav_character_to_nav_comic, comicBundle)
     }
 }
