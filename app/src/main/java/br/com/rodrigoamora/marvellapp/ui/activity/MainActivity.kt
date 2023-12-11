@@ -1,9 +1,7 @@
 package br.com.rodrigoamora.marvellapp.ui.activity
 
-import android.annotation.TargetApi
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -20,7 +18,7 @@ import br.com.rodrigoamora.marvellapp.databinding.ActivityMainBinding
 import br.com.rodrigoamora.marvellapp.factory.ShortcutFactory
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -30,12 +28,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        instantiateBinding()
-        setupToolbarNavigationViewNavController()
+        this.instantiateBinding()
+        this.setupToolbarNavigationViewNavController()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
+        this.menuInflater.inflate(R.menu.main, menu)
         return true
     }
 
@@ -45,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun instantiateBinding() {
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        this.binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 
@@ -64,39 +62,36 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView = binding.navView
-        navView.itemIconTintList = null
+        this.navView = binding.navView
+        this.navView.itemIconTintList = null
 
-        navController = findNavController(R.id.nav_host_fragment_content_main)
+        this.navController = findNavController(R.id.nav_host_fragment_content_main)
 
-        appBarConfiguration = AppBarConfiguration(
+        this.appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_list_characters, R.id.nav_comics
             ), drawerLayout
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        this.navView.setupWithNavController(navController)
     }
 
-    @TargetApi(26)
     private fun createShortcut() {
-        if (Build.VERSION.SDK_INT >= 26) {
-            val shortcutManager = getSystemService(ShortcutManager::class.java)
-            val shortLabels = arrayOf<String>(
-                getString(R.string.shortcut_characters),
-                getString(R.string.shortcut_comics)
-            )
+        val shortcutManager = getSystemService(ShortcutManager::class.java)
+        val shortLabels = arrayOf<String>(
+            getString(R.string.shortcut_characters),
+            getString(R.string.shortcut_comics)
+        )
 
-            val icons = arrayOf<Int>(
-                R.drawable.ic_menu_characters,
-                R.drawable.ic_menu_comics
-            )
-            val shortcutInfoList: List<ShortcutInfo?> = ShortcutFactory.createShortcutInfo(this,
-                shortLabels,
-                icons)
+        val icons = arrayOf<Int>(
+            R.drawable.ic_menu_characters,
+            R.drawable.ic_menu_comics
+        )
+        val shortcutInfoList: List<ShortcutInfo?> = ShortcutFactory.createShortcutInfo(this,
+            shortLabels,
+            icons)
 
-            shortcutManager.dynamicShortcuts = shortcutInfoList
-        }
+        shortcutManager.dynamicShortcuts = shortcutInfoList
     }
 }
