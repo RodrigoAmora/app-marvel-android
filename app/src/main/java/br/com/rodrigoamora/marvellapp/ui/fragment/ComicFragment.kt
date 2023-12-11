@@ -8,11 +8,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import br.com.rodrigoamora.marvellapp.R
+import br.com.rodrigoamora.marvellapp.databinding.FragmentComicBinding
 import br.com.rodrigoamora.marvellapp.extension.loadImageWithGlide
 import br.com.rodrigoamora.marvellapp.model.Comic
 
+
 class ComicFragment: Fragment() {
+
+    private var _binding: FragmentComicBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var tvTitleComic: TextView
     private lateinit var tvDescriptionComic: TextView
@@ -22,27 +26,28 @@ class ComicFragment: Fragment() {
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.fragment_comic, container, false)
+        this._binding = FragmentComicBinding.inflate(inflater, container, false)
+        val root: View = this.binding.root
 
-        tvTitleComic = root.findViewById(R.id.tv_title_comic)
-        tvDescriptionComic = root.findViewById(R.id.tv_description_comic)
-        ivImageComic = root.findViewById(R.id.iv_image_comic)
+        this.tvTitleComic = this.binding.tvTitleComic
+        this.tvDescriptionComic = this.binding.tvDescriptionComic
+        this.ivImageComic = this.binding.ivImageComic
 
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        populateViews()
+        this.populateViews()
     }
 
     private fun populateViews() {
-        comic = arguments?.getSerializable("comic") as Comic
+        this.comic = arguments?.getSerializable("comic") as Comic
 
-        tvTitleComic.text = comic.title
-        tvDescriptionComic.text = comic.description
+        this.tvTitleComic.text = this.comic.title
+        this.tvDescriptionComic.text = this.comic.description
 
-        val imageComicURL = comic.thumbnail.formatURL()
+        val imageComicURL = this.comic.thumbnail.formatURL()
         context?.let { ivImageComic.loadImageWithGlide(it, imageComicURL) }
     }
 
