@@ -126,7 +126,7 @@ dependencies {
 
     // ESPRESSO
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-
+    implementation 'androidx.test.espresso:espresso-contrib:3.5.1'
 
     // FRAGMENT TESTING
     debugImplementation("androidx.fragment:fragment-testing:1.6.0")
