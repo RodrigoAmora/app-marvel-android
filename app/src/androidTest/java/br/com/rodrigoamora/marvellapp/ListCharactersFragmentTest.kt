@@ -16,7 +16,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest {
+class ListCharactersFragmentTest {
 
     private lateinit var context: Context
 
