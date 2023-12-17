@@ -55,6 +55,7 @@ class ListCharactersFragment: BaseFragment() {
         this.fabSearchCharacterByName.setOnClickListener {
             if (this.searchView.visibility == View.GONE) {
                 this.searchView.visibility = View.VISIBLE
+                this.searchView.requestFocus()
             } else {
                 this.searchView.visibility = View.GONE
             }
