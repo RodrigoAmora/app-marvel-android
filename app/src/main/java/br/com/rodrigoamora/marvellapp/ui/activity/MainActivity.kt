@@ -10,13 +10,14 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import br.com.rodrigoamora.marvellapp.R
 import br.com.rodrigoamora.marvellapp.databinding.ActivityMainBinding
 import br.com.rodrigoamora.marvellapp.factory.ShortcutFactory
 import com.google.android.material.navigation.NavigationView
+
 
 class MainActivity: AppCompatActivity() {
 
@@ -38,20 +39,20 @@ class MainActivity: AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        //val navController = findNavController(R.id.nav_host_fragment_content_main)
+        return this.navController.navigateUp(this.appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     private fun instantiateBinding() {
         this.binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(this.binding.root)
     }
 
     private fun setupToolbarNavigationViewNavController() {
-        val toolbar = binding.appBarMain.toolbar
+        val toolbar = this.binding.appBarMain.toolbar
         setSupportActionBar(toolbar)
 
-        val drawerLayout: DrawerLayout = binding.drawerLayout
+        val drawerLayout: DrawerLayout = this.binding.drawerLayout
         val toggle = ActionBarDrawerToggle(
             this,
             drawerLayout, toolbar,
@@ -62,7 +63,7 @@ class MainActivity: AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        this.navView = binding.navView
+        this.navView = this.binding.navView
         this.navView.itemIconTintList = null
 
         this.navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -73,7 +74,8 @@ class MainActivity: AppCompatActivity() {
             ), drawerLayout
         )
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
+
         this.navView.setupWithNavController(navController)
     }
 
