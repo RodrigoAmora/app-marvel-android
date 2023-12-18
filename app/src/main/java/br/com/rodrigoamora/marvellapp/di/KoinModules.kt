@@ -3,12 +3,12 @@ package br.com.rodrigoamora.marvellapp.di
 import androidx.room.Room
 import br.com.rodrigoamora.marvellapp.BuildConfig
 import br.com.rodrigoamora.marvellapp.database.AppDatabase
-import br.com.rodrigoamora.marvellapp.repository.CharacterRepository
-import br.com.rodrigoamora.marvellapp.repository.impl.CharacterRepositoryImpl
 import br.com.rodrigoamora.marvellapp.network.retrofit.AppRetrofit
 import br.com.rodrigoamora.marvellapp.network.retrofit.webclient.CharacterWebClient
 import br.com.rodrigoamora.marvellapp.network.retrofit.webclient.ComicWebClient
+import br.com.rodrigoamora.marvellapp.repository.CharacterRepository
 import br.com.rodrigoamora.marvellapp.repository.ComicRepository
+import br.com.rodrigoamora.marvellapp.repository.impl.CharacterRepositoryImpl
 import br.com.rodrigoamora.marvellapp.repository.impl.ComicRepositoryImpl
 import br.com.rodrigoamora.marvellapp.ui.viewmodel.CharacterViewModel
 import br.com.rodrigoamora.marvellapp.ui.viewmodel.ComicViewModel
