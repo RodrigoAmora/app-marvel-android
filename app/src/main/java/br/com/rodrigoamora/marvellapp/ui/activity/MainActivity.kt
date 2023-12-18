@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -31,6 +32,8 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         this.instantiateBinding()
         this.setupToolbarNavigationViewNavController()
+        this.createShortcut()
+        this.checkOptionInIntent()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -90,10 +93,34 @@ class MainActivity: AppCompatActivity() {
             R.drawable.ic_menu_characters,
             R.drawable.ic_menu_comics
         )
+
+        val options = arrayOf<String> (
+            "characters",
+            "comics"
+        )
+
         val shortcutInfoList: List<ShortcutInfo?> = ShortcutFactory.createShortcutInfo(this,
             shortLabels,
-            icons)
+            icons,
+            options)
 
         shortcutManager.dynamicShortcuts = shortcutInfoList
+    }
+
+    private fun checkOptionInIntent() {
+        val option = intent.getStringExtra("option")
+        val destination = when(option) {
+            "characters" -> R.id.action_nav_list_characters_to_nav_character
+            else -> {
+                R.id.action_nav_list_characters_to_nav_character
+            }
+        }
+
+        if (!option.isNullOrEmpty()) {
+            val bundle = Bundle()
+            bundle.putString("option", option)
+            Navigation.findNavController(this.navView)
+                .navigate(destination, bundle)
+        }
     }
 }
