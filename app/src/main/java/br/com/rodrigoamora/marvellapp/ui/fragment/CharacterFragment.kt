@@ -20,6 +20,7 @@ import br.com.rodrigoamora.marvellapp.ui.activity.MainActivity
 import br.com.rodrigoamora.marvellapp.ui.viewmodel.ComicViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 class CharacterFragment: BaseFragment() {
 
     private var _binding: FragmentCharacterBinding? = null
@@ -33,9 +34,12 @@ class CharacterFragment: BaseFragment() {
     private lateinit var spComics: Spinner
 
     private lateinit var character: Character
-    private lateinit var mainActivity: MainActivity
     private val comics: MutableList<Comic> = mutableListOf()
     private val titles: MutableList<String> = mutableListOf()
+    private val mainActivity: MainActivity by lazy {
+        activity as MainActivity
+    }
+
     private var currentSelection: Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -63,7 +67,6 @@ class CharacterFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        this.recoveryActivity()
         this.populateViews()
         this.loadSpinner()
         this.getComicsByCharacterId()
@@ -72,10 +75,6 @@ class CharacterFragment: BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         this._binding = null
-    }
-
-    private fun recoveryActivity() {
-        this.mainActivity = activity as MainActivity
     }
 
     private fun populateViews() {
@@ -128,5 +127,6 @@ class CharacterFragment: BaseFragment() {
         comicBundle.putSerializable("comic", comic)
         Navigation.findNavController(this.spComics)
                     .navigate(R.id.action_nav_character_to_nav_comic, comicBundle)
+
     }
 }

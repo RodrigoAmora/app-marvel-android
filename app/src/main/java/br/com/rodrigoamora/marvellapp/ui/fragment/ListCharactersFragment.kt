@@ -39,8 +39,11 @@ class ListCharactersFragment: BaseFragment() {
     private lateinit var swipeRefresh : SwipeRefreshLayout
 
     private lateinit var adapter: ListCharactersAdapter
-    private lateinit var mainActivity: MainActivity
     private lateinit var characters: List<Character>
+    private val mainActivity: MainActivity by lazy {
+        activity as MainActivity
+    }
+
     private var offset = 0
 
     override fun onCreateView(
@@ -89,7 +92,6 @@ class ListCharactersFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        this.recoveryActivity()
         this.configureRecyclerView()
         this.configureAdapter()
         this.getCharacters()
@@ -182,12 +184,8 @@ class ListCharactersFragment: BaseFragment() {
     private fun viewDetails(character: Character) {
         val characterBundle = Bundle()
         characterBundle.putSerializable("character", character)
-        Navigation.findNavController(recyclerViewCharacters)
+        Navigation.findNavController(this.recyclerViewCharacters)
                   .navigate(R.id.action_nav_list_characters_to_nav_character, characterBundle)
     }
 
-    @SuppressLint("RestrictedApi")
-    private fun recoveryActivity() {
-        this.mainActivity = activity as MainActivity
-    }
 }
