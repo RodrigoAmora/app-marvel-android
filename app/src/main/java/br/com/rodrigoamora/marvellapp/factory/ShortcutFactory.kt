@@ -1,6 +1,5 @@
 package br.com.rodrigoamora.marvellapp.factory
 
-import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ShortcutInfo
@@ -11,11 +10,11 @@ import br.com.rodrigoamora.marvellapp.ui.activity.MainActivity
 
 class ShortcutFactory {
     companion object {
-        @TargetApi(26)
         fun createShortcutInfo(
             context: Context,
             shortLabels: Array<String>,
-            icons: Array<Int>
+            icons: Array<Int>,
+            options: Array<String>
         ): List<ShortcutInfo?> {
             val shortcutInfoList: MutableList<ShortcutInfo?> = mutableListOf()
 
@@ -29,6 +28,7 @@ class ShortcutFactory {
                     }
                 }
                 intent.action = Intent.ACTION_VIEW
+                intent.putExtra("option", options[i])
 
                 val icon = icons[i]?.let { Icon.createWithResource(context, it) }
                 val shortcutInfo = ShortcutInfo
