@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import br.com.rodrigoamora.marvellapp.model.Character
 
@@ -13,10 +13,10 @@ interface CharacterDao {
     @Query("SELECT * FROM Character order by Character.name asc")
     fun findAll(): LiveData<List<Character>>
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(character: Character)
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(characters: List<Character>)
 
     @Delete
