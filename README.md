@@ -4,7 +4,8 @@ O App roda a partir do Android 8.0 (API Level 26).
 
 <hr>
 
-O App usa as seguintes dependências:
+Dependências:
+-------------
 
 * Constraint Layout
 * Coroutines
@@ -24,6 +25,14 @@ O App usa as seguintes dependências:
 * Retrofit
 * Room
 * View Model
+
+Configuração:
+-------------
+
+Colocar as seguintes propriedas no arquivo `local.properties`: <br>
+* `MARVEL_BASE_URL` - Com a base do endpoint da API
+* `MARVEL_API_KEY` - Com a KEY da API
+* `MARVEL_MD5_HASH` - Com o Hash da API
 
 <hr>
 
