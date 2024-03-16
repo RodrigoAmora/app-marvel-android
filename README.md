@@ -6,6 +6,7 @@ O App roda a partir do Android 8.0 (API Level 26).
 
 Dependências:
 -------------
+O App usa as seguintes dependências:
 
 * Constraint Layout
 * Coroutines
