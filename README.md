@@ -1,6 +1,7 @@
 # app-marvel-android
-App que consulta a API da Marvel usando a arquitetura MVVM, Injeção de Dependências, Persistência dos dados off-line, Teste de Integração e Teste de UI.<br>
-O App roda a partir do Android 8.0 (API Level 26).
+App Android Nativo que consulta a API da Marvel: https://developer.marvel.com/ <br>
+
+O App roda a partir do Android 8.0 (API Level 26), usa a arquitetura MVVM, Injeção de Dependências, Persistência dos dados off-line, Teste de Integração e Teste de UI.
 
 <hr>
 
@@ -29,7 +30,6 @@ O App usa as seguintes dependências:
 
 Configuração:
 -------------
-
 Colocar as seguintes propriedas no arquivo `local.properties`: <br>
 * `MARVEL_BASE_URL` - Com a base do endpoint da API
 * `MARVEL_API_KEY` - Com a KEY da API
