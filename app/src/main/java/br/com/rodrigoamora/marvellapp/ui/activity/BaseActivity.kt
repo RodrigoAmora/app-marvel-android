@@ -9,19 +9,21 @@ import com.google.android.material.snackbar.Snackbar
 open class BaseActivity : AppCompatActivity() {
 
     fun showError(responseCode: Int) {
-        when (responseCode) {
+        val messageError = when (responseCode) {
             403 -> {
-                showToast(getString(R.string.error_access_denied))
+                getString(R.string.error_access_denied)
             }
 
             in 500..599 -> {
-                showToast(getString(R.string.error_service_unavailable))
+                getString(R.string.error_service_unavailable)
             }
 
             else -> {
-                showToast(getString(R.string.error_cant_was_possible_perform_operation))
+                getString(R.string.error_cant_was_possible_perform_operation)
             }
         }
+
+        this.showToast(messageError)
     }
 
     fun showToast(message: String) {
