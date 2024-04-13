@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import br.com.rodrigoamora.marvellapp.R
 import br.com.rodrigoamora.marvellapp.databinding.FragmentAboutBinding
+import br.com.rodrigoamora.marvellapp.ui.activity.MainActivity
 import br.com.rodrigoamora.marvellapp.util.PackageInfoUtil
 
 class AboutFragment: Fragment() {
@@ -17,26 +17,32 @@ class AboutFragment: Fragment() {
 
     private lateinit var tvVersionApp: TextView
 
+    private val mainActivity: MainActivity by lazy {
+        activity as MainActivity
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAboutBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        this._binding = FragmentAboutBinding.inflate(inflater, container, false)
+        val root: View = this.binding.root
 
-        tvVersionApp = binding.tvVersionApp
+        this.tvVersionApp = this.binding.tvVersionApp
 
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvVersionApp.text = context?.let { getString(R.string.version_app, PackageInfoUtil.getVersionName(it)) }
+        val versionName = PackageInfoUtil.getVersionName(this.mainActivity)
+        this.tvVersionApp.text = versionName
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        this._binding = null
     }
+
 }
