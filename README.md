@@ -35,13 +35,6 @@ Colocar as seguintes propiedades no arquivo `local.properties`: <br>
 * `MARVEL_API_KEY` - Com a KEY da API
 * `MARVEL_MD5_HASH` - Com o Hash da API
 
-<br>
-
-Criar o arquivo `secrets.properties` no diretório raiz do projeto e colocar a propriedade `MAPS_API_KEY` com a API_KEY do Google Maps. <br>
-
-Exmpelo:<br>
-`MAPS_API_KEY=<API_KEY_DO_GOOGLE_MAPS>`
-
 <hr>
 
 
