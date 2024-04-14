@@ -30,7 +30,7 @@ O App usa as seguintes dependências:
 
 Configuração:
 -------------
-Colocar as seguintes propriedades no arquivo `local.properties`: <br>
+Colocar as seguintes propiedades no arquivo `local.properties`: <br>
 * `MARVEL_BASE_URL` - Com a base do endpoint da API
 * `MARVEL_API_KEY` - Com a KEY da API
 * `MARVEL_MD5_HASH` - Com o Hash da API
