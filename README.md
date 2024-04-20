@@ -38,5 +38,3 @@ Colocar as seguintes propiedades no arquivo `local.properties`: <br>
 * `MARVEL_MD5_HASH` - Com o Hash da API
 
 <hr>
-
-
