@@ -1,4 +1,6 @@
 # app-marvel-android
+Descrição:
+----------
 App Android Nativo que consulta a API da Marvel: https://developer.marvel.com/ <br>
 
 O App roda a partir do Android 8.0 (API Level 26), usa a arquitetura MVVM, Injeção de Dependências, Persistência dos dados off-line, Teste de Integração e Teste de UI.
