@@ -16,7 +16,7 @@ class ComicRepositoryImpl(
     private val mediator = MediatorLiveData<Resource<List<Comic>?>>()
 
     override fun getComicsByCharacterId(characterId: Int): LiveData<Resource<List<Comic>?>> {
-        getComicsByCharacterId(characterId,
+        this.getComicsByCharacterId(characterId,
             completion = { comics ->
                         mediator.value = Resource(result = comics)
             },
@@ -30,7 +30,7 @@ class ComicRepositoryImpl(
     private fun getComicsByCharacterId(characterId: Int,
                                        completion: (comics: List<Comic>) -> Unit,
                                        failure: (errorCode: Int) -> Unit) {
-        comicWebClient.getComicsByCharacterId(characterId,
+        this.comicWebClient.getComicsByCharacterId(characterId,
             completion = { comics ->
                 comics?.data?.result?.let {
                     completion(it)

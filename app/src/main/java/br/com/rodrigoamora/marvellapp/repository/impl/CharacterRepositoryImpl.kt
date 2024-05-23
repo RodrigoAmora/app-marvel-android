@@ -19,11 +19,11 @@ class CharacterRepositoryImpl(
     private val mediator = MediatorLiveData<Resource<List<Character>?>>()
 
     override fun getCharacters(offset: Int): LiveData<Resource<List<Character>?>> {
-        mediator.addSource(getCharactersFromDataBase()) { charactersFound ->
+        this.mediator.addSource(getCharactersFromDataBase()) { charactersFound ->
             mediator.value = Resource(charactersFound)
         }
 
-        getCharacters(offset,
+        this.getCharacters(offset,
             failure = { errorCode ->
                 val currentResource = mediator.value
                 mediator.value = Resource(result = currentResource?.result, error = errorCode)
@@ -34,7 +34,7 @@ class CharacterRepositoryImpl(
     }
 
     private fun getCharacters(offset: Int, failure: (errorCode: Int) -> Unit) {
-        characterWebClient.getCharacters(offset,
+        this.characterWebClient.getCharacters(offset,
             completion = { charactersList ->
                 charactersList?.data?.result?.let {
                     saveCharacters(it)
@@ -45,7 +45,7 @@ class CharacterRepositoryImpl(
     }
 
     override fun getCharacterByName(name: String): LiveData<Resource<List<Character>?>> {
-        getCharacterByName(name,
+        this.getCharacterByName(name,
             failure = { errorCode ->
                 mediator.value = Resource(result = null, error = errorCode)
             }
@@ -55,7 +55,7 @@ class CharacterRepositoryImpl(
 
     private fun getCharacterByName(name: String,
                                    failure: (errorCode: Int) -> Unit) {
-        characterWebClient.getCharacterByName(name,
+        this.characterWebClient.getCharacterByName(name,
             completion = { charactersList ->
                 charactersList?.data?.result?.let {
                     mediator.value = Resource(result = it)
@@ -65,16 +65,14 @@ class CharacterRepositoryImpl(
         )
     }
 
-    private fun getCharactersFromDataBase(): LiveData<List<Character>> {
-        return characterDao.findAll()
-    }
+    private fun getCharactersFromDataBase(): LiveData<List<Character>> = this.characterDao.findAll()
 
     override fun saveCharacter(character: Character) {
-        saveInDatabase(character)
+        this.saveInDatabase(character)
     }
 
     override fun saveCharacters(charactersList: List<Character>) {
-        saveInDatabase(charactersList)
+        this.saveInDatabase(charactersList)
     }
 
     private fun saveInDatabase(character: Character) {
@@ -88,4 +86,5 @@ class CharacterRepositoryImpl(
             characterDao.save(charactersList)
         }
     }
+
 }
