@@ -9,19 +9,21 @@ import com.google.android.material.snackbar.Snackbar
 
 open class BaseFragment: Fragment() {
     fun showError(context: Context, responseCode: Int) {
-        when (responseCode) {
+        val messageError = when (responseCode) {
             403 -> {
-                showToast(context, getString(R.string.error_access_denied))
+                getString(R.string.error_access_denied)
             }
 
             in 500..599 -> {
-                showToast(context, getString(R.string.error_service_unavailable))
+                getString(R.string.error_service_unavailable)
             }
 
             else -> {
-                showToast(context, getString(R.string.error_cant_was_possible_perform_operation))
+                getString(R.string.error_cant_was_possible_perform_operation)
             }
         }
+
+        this.showToast(context, messageError)
     }
 
     fun showToast(context: Context, message: String) {
