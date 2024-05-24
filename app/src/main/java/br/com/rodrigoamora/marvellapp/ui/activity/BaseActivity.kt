@@ -26,7 +26,7 @@ open class BaseActivity : AppCompatActivity() {
         this.showToast(messageError)
     }
 
-    fun showToast(message: String) {
+    private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
