@@ -3,7 +3,7 @@ Descrição:
 ----------
 Projeto que exibe personagens e HQs da Marvel.<br>
 O App roda a partir do Android 8.0 (API Level 26), usa a arquitetura MVVM, Injeção de Dependências, Persistência dos dados off-line, Teste de Integração e Teste de UI.
-<br>
+<br><br>
 O projeto consulta a API oficial da Marvel: https://developer.marvel.com/
 
 Dependências:
