@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import br.com.rodrigoamora.marvellapp.R
 import br.com.rodrigoamora.marvellapp.databinding.FragmentComicBinding
 import br.com.rodrigoamora.marvellapp.extension.loadImageWithGlide
 import br.com.rodrigoamora.marvellapp.model.Comic
@@ -45,7 +46,13 @@ class ComicFragment: Fragment() {
         this.comic = arguments?.getSerializable("comic") as Comic
 
         this.tvTitleComic.text = this.comic.title
-        this.tvDescriptionComic.text = this.comic.description
+
+        val comicDescription = this.comic.description
+        if (comicDescription.isEmpty()) {
+            this.tvDescriptionComic.text = getString(R.string.comic_without_description)
+        } else {
+            this.tvDescriptionComic.text = comicDescription
+        }
 
         val imageComicURL = this.comic.thumbnail.formatURL()
         context?.let { ivImageComic.loadImageWithGlide(it, imageComicURL) }
