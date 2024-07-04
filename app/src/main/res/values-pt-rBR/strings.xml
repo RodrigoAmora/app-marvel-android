@@ -42,4 +42,5 @@
     <string name="comics">HQs:</string>
     <string name="comic_label">HQ</string>
     <string name="comics_label">HQs</string>
+    <string name="comic_without_description">Esta HQ nnao tem descrição.</string>
 </resources>

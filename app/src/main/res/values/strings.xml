@@ -41,4 +41,5 @@
     <string name="comics">Comics:</string>
     <string name="comic_label">Comic</string>
     <string name="comics_label">Comics</string>
+    <string name="comic_without_description">This comic don\'t have description.</string>
 </resources>
