@@ -128,6 +128,17 @@ class ListCharactersFragment: BaseFragment() {
                 }
             }
         })
+
+        this.recyclerViewCharacters.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0 || dy < 0 && fabSearchCharacterByName.isShown()) fabSearchCharacterByName.hide()
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) fabSearchCharacterByName.show()
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+        })
     }
 
     private fun configureAdapter() {
