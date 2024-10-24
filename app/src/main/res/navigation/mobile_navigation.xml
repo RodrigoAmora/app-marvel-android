@@ -15,8 +15,10 @@
             app:destination="@id/nav_character"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
+            app:launchSingleTop="false"
             app:popEnterAnim="@animator/nav_default_enter_anim"
-            app:popExitAnim="@anim/nav_default_exit_anim" />
+            app:popExitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/nav_list_characters" />
     </fragment>
 
     <fragment
@@ -30,7 +32,8 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@animator/nav_default_pop_enter_anim"
-            app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+            app:popExitAnim="@animator/nav_default_pop_exit_anim"
+            app:popUpTo="@id/nav_character" />
     </fragment>
 
     <fragment
