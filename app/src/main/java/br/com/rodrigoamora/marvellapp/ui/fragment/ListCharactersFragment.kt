@@ -46,11 +46,9 @@ class ListCharactersFragment: BaseFragment() {
 
     private var offset = 0
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
         this._binding = FragmentListCharactersBinding.inflate(inflater, container, false)
         val root: View = this.binding.root
 
@@ -104,12 +102,12 @@ class ListCharactersFragment: BaseFragment() {
 
     private fun configureRecyclerView() {
         val linearLayout = LinearLayoutManager(this.mainActivity,
-            LinearLayoutManager.VERTICAL,
-            false)
+                                               LinearLayoutManager.VERTICAL,
+                                    false)
         linearLayout.scrollToPosition(0)
 
         val dividerItemDecoration = DividerItemDecoration(this.mainActivity,
-            DividerItemDecoration.VERTICAL)
+                                                          DividerItemDecoration.VERTICAL)
 
         this.adapter = ListCharactersAdapter(this.mainActivity.applicationContext)
 

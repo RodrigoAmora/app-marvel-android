@@ -40,7 +40,9 @@ class CharacterRepositoryImpl(
                     saveCharacters(it)
                 }
             },
-            failure = { errorCode ->  failure(errorCode) }
+            failure = { errorCode ->
+                failure(errorCode)
+            }
         )
     }
 
@@ -61,7 +63,9 @@ class CharacterRepositoryImpl(
                     mediator.value = Resource(result = it)
                 }
             },
-            failure = { errorCode ->  failure(errorCode) }
+            failure = { errorCode ->
+                failure(errorCode)
+            }
         )
     }
 

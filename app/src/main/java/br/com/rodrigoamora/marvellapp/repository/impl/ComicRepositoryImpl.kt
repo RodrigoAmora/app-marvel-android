@@ -8,20 +8,18 @@ import br.com.rodrigoamora.marvellapp.network.retrofit.webclient.ComicWebClient
 import br.com.rodrigoamora.marvellapp.repository.ComicRepository
 import br.com.rodrigoamora.marvellapp.repository.Resource
 
-class ComicRepositoryImpl(
-    private val comicDao: ComicDao,
-    private val comicWebClient: ComicWebClient
-): ComicRepository {
+class ComicRepositoryImpl(private val comicDao: ComicDao,
+                          private val comicWebClient: ComicWebClient): ComicRepository {
 
     private val mediator = MediatorLiveData<Resource<List<Comic>?>>()
 
     override fun getComicsByCharacterId(characterId: Int): LiveData<Resource<List<Comic>?>> {
         this.getComicsByCharacterId(characterId,
             completion = { comics ->
-                        mediator.value = Resource(result = comics)
+                mediator.value = Resource(result = comics)
             },
             failure = { errorCode ->
-                        mediator.value = Resource(result = null, error = errorCode)
+                mediator.value = Resource(result = null, error = errorCode)
             }
         )
         return mediator

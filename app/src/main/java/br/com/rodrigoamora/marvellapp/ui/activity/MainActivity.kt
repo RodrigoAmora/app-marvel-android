@@ -84,20 +84,14 @@ class MainActivity: AppCompatActivity() {
 
     private fun createShortcut() {
         val shortcutManager = getSystemService(ShortcutManager::class.java)
-        val shortLabels = arrayOf<String>(
-            getString(R.string.shortcut_characters),
-            getString(R.string.shortcut_comics)
-        )
+        val shortLabels = arrayOf<String>(getString(R.string.shortcut_characters),
+                                                       getString(R.string.shortcut_comics))
 
-        val icons = arrayOf<Int>(
-            R.drawable.ic_menu_characters,
-            R.drawable.ic_menu_comics
-        )
+        val icons = arrayOf<Int>(R.drawable.ic_menu_characters,
+                                            R.drawable.ic_menu_comics)
 
-        val options = arrayOf<String> (
-            "characters",
-            "comics"
-        )
+        val options = arrayOf<String> (getString(R.string.shortcut_characters),
+                                                    getString(R.string.shortcut_comics))
 
         val shortcutInfoList: List<ShortcutInfo?> = ShortcutFactory.createShortcutInfo(this,
             shortLabels,
