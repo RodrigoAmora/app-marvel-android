@@ -78,7 +78,7 @@ class CharacterFragment: BaseFragment() {
     }
 
     private fun populateViews() {
-        this.character = arguments?.getSerializable("character") as Character
+        this.character = arguments?.getSerializable("character", Character::class.java)!!
 
         val imageCharacterURL = this.character.thumbnail.formatURL()
         this.ivImageCharacter.loadCircleImageWithGlide(this.mainActivity, imageCharacterURL)
@@ -118,7 +118,7 @@ class CharacterFragment: BaseFragment() {
             this.titles.add(comic.title)
         }
 
-        val arrayAdapter = context?.let { ArrayAdapter<String>(it, android.R.layout.simple_list_item_1, titles) }
+        val arrayAdapter = this.mainActivity.let { ArrayAdapter<String>(it, android.R.layout.simple_list_item_1, titles) }
         this.spComics.adapter = arrayAdapter
     }
 
@@ -126,7 +126,7 @@ class CharacterFragment: BaseFragment() {
         val comicBundle = Bundle()
         comicBundle.putSerializable("comic", comic)
         Navigation.findNavController(this.spComics)
-                    .navigate(R.id.action_nav_character_to_nav_comic, comicBundle)
+                   .navigate(R.id.action_nav_character_to_nav_comic, comicBundle)
 
     }
 }
