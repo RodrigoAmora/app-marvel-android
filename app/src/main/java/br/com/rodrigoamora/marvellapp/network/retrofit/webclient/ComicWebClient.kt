@@ -35,7 +35,7 @@ class ComicWebClient(private val characterService: CharacterService,
     fun getComicsByCharacterId(characterId: Int,
                                completion: (comicResponse: ComicResponse?) -> Unit,
                                failure: (errorCode: Int) -> Unit) {
-        executeRequest(characterService.getComicsOfCharacterId(characterId,1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH),
+        executeRequest(this.characterService.getComicsOfCharacterId(characterId,1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH),
                 completion = { comicsResponse ->
                     comicsResponse?.let {
                         completion(it)

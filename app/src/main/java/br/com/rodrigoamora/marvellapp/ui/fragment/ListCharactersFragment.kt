@@ -168,7 +168,7 @@ class ListCharactersFragment: BaseFragment() {
                 characters.error?.let { showError(mainActivity, it) }
 
                 if (!NetworkUtil.checkConnection(mainActivity)) {
-                    showToast(mainActivity, getString(R.string.error_no_internet))
+                    this.showToast(mainActivity, getString(R.string.error_no_internet))
                 }
             }
         )
@@ -185,7 +185,7 @@ class ListCharactersFragment: BaseFragment() {
                 }
             )
         } else {
-            showToast(this.mainActivity, getString(R.string.error_no_internet))
+            this.showToast(this.mainActivity, getString(R.string.error_no_internet))
         }
     }
 

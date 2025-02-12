@@ -32,7 +32,7 @@ class CharacterWebClient(private val service: CharacterService) {
 
     fun getCharacters(offset: Int, completion: (charactersList: CharacterResponse?) -> Unit,
                       failure: (errorCode: Int) -> Unit) {
-        executeRequest(service.getCharacters(1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH, 20, offset, "name"),
+        executeRequest(this.service.getCharacters(1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH, 20, offset, "name"),
             completion = { charactersList ->
                 charactersList?.let {
                     completion(it)
@@ -45,7 +45,7 @@ class CharacterWebClient(private val service: CharacterService) {
     fun getCharacterByName(name: String,
                            completion: (charactersList: CharacterResponse?) -> Unit,
                            failure: (errorCode: Int) -> Unit) {
-        executeRequest(service.getCharacterByName(1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH, name),
+        executeRequest(this.service.getCharacterByName(1, MarvelApiKey.API_KEY, MarvelApiKey.MD5_HASH, name),
             completion = { charactersList ->
                 charactersList?.let {
                     completion(it)
