@@ -83,7 +83,13 @@ class CharacterFragment: BaseFragment() {
         val imageCharacterURL = this.character.thumbnail.formatURL()
         this.ivImageCharacter.loadCircleImageWithGlide(this.mainActivity, imageCharacterURL)
 
-        this.tvDescriptionCharacter.text = this.character.description
+        val description = this.character.description
+        if (description.isNullOrEmpty()) {
+            this.tvDescriptionCharacter.text = getString(R.string.character_without_description)
+        } else {
+            this.tvDescriptionCharacter.text = description
+        }
+
         this.tvNameCharacter.text = this.character.name
     }
 

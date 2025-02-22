@@ -36,11 +36,12 @@
     <string name="character">Personagen:</string>
     <string name="no_character_whit_this_name">Não foi encontrado nenhum personagem com este nome.</string>
     <string name="search_character_by_name">Buscar personagen pelo nome</string>
+    <string name="character_without_description">Este personagen não tem descrição.</string>
 
     <!-- COMIC -->
     <string name="comic">HQ:</string>
     <string name="comics">HQs:</string>
     <string name="comic_label">HQ</string>
     <string name="comics_label">HQs</string>
-    <string name="comic_without_description">Esta HQ nnao tem descrição.</string>
+    <string name="comic_without_description">Esta HQ não tem descrição.</string>
 </resources>
