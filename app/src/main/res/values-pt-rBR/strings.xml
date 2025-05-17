@@ -24,11 +24,11 @@
     <string name="error_no_internet">Sem internet!</string>
 
     <!-- SHORTCUT -->
-    <string name="shortcut_characters">Characters</string>
-    <string name="shortcut_comics">Comics</string>
+    <string name="shortcut_characters">Personagens</string>
+    <string name="shortcut_comics">HQs</string>
 
     <!-- ABOUT -->
-    <string name="created_by">Criado por: Rodrigo Amora</string>
+    <string name="created_by">Criado por Rodrigo Amora</string>
     <string name="email_rodrigo_amora">Email: rodrigo.amora.freitas@gmail.com</string>
     <string name="version_app">Versão: %s</string>
 
