@@ -27,7 +27,7 @@
     <string name="shortcut_comics">Comics</string>
 
     <!-- ABOUT -->
-    <string name="created_by">Criado por: Rodrigo Amora</string>
+    <string name="created_by">Created by Rodrigo Amora</string>
     <string name="email_rodrigo_amora">Email: rodrigo.amora.freitas@gmail.com</string>
     <string name="version_app">Version: %s</string>
 
