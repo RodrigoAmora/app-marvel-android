@@ -133,6 +133,5 @@ class CharacterFragment: BaseFragment() {
         comicBundle.putSerializable("comic", comic)
         Navigation.findNavController(this.spComics)
                    .navigate(R.id.action_nav_character_to_nav_comic, comicBundle)
-
     }
 }

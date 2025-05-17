@@ -181,7 +181,9 @@ class ListCharactersFragment: BaseFragment() {
                     characters.result?.let {
                         replaceRecyclerView(it)
                     }
-                    characters.error?.let { showError(mainActivity, it) }
+                    characters.error?.let {
+                        showError(mainActivity, it)
+                    }
                 }
             )
         } else {
